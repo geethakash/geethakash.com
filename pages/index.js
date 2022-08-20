@@ -61,6 +61,7 @@ export default function IndexPage() {
                   </svg>
 
                   <div className=" text-gray-400 ">Experience</div>
+                  
                 </a>
                 <a
                   href="#"
