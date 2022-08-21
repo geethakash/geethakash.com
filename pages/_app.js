@@ -1,12 +1,15 @@
 import '../styles/global.css';
 
 import Head from 'next/head';
+import { AnimatePresence } from 'framer-motion';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head></Head>
-      <Component {...pageProps} />
+      <AnimatePresence>
+        <Component {...pageProps} />
+      </AnimatePresence>
     </>
   );
 }

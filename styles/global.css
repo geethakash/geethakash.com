@@ -12,6 +12,8 @@ body {
   /* backgrsound: linear-gradient(96.62deg, #6588f6 0%, #fda085 96.94%); */
   background: linear-gradient(
     45deg,
+    white,
+    white,
     #6588f6,
     #fda085,
     #a8edea,
@@ -19,12 +21,12 @@ body {
     #df89b5,
     #bfd9fe
   );
+
   background-size: 600%;
-  display: inline;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textanimations 10s ease infinite;
@@ -41,3 +43,4 @@ body {
     background-position: 0% 50%;
   }
 }
+
