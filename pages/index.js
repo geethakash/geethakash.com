@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react';
-import Head from 'next/head';
-import LayoutMain from '../components/layouts/LayoutMain';
 import { motion } from 'framer-motion';
+import { LayoutMain, Head } from '../components';
 
 export default function IndexPage() {
   return (
     <>
-      <Head>
-        <title>Akash Geethanjana | Frontend Developer</title>
-      </Head>
+      <Head
+        title="Akash Geethanjana | Frontend Developer"
+        description="My name is Akash Geethanjana.I'm a frontend developer with passion for creating beautiful and functional user interfaces with best technologies."
+        keywords="developer, frontend, fullstack, websites, ui, ux, react, django, python, javascript, agile, design"
+        ogImage="/assets/image/og-image.png"
+        siteName="GeethAkash"
+        url="https://geethakash.com/"
+        socialImage="/assets/image/profile-img.png"
+      />
       <LayoutMain>
         <section className="w-full relative  bg-black">
           <div className="flex flex-col lg:flex-row container justify-center items-center mx-auto px-10 lg:px-20 pt-32">
