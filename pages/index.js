@@ -96,7 +96,7 @@ export default function IndexPage() {
               </div>
             </div>
           </div>
-          <div className="contact text-2xl text-gray-300 container mx-auto px-10 lg:px-20 mt-10 ">
+          <div className="contact text-2xl text-gray-300 container mx-auto px-10 lg:px-20 mt-5 ">
             <a
               className="border-b-2 border-transparent hover:border-teal-400 hover:text-teal-400 transition-colors duration-300 pb-1"
               href="mailto:hello@geethakash.com"
