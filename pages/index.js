@@ -9,10 +9,10 @@ export default function IndexPage() {
         title="Akash Geethanjana | Frontend Developer"
         description="My name is Akash Geethanjana.I'm a frontend developer with passion for creating beautiful and functional user interfaces with best technologies."
         keywords="developer, frontend, fullstack, websites, ui, ux, react, django, python, javascript, agile, design"
-        ogImage="/assets/image/og-image.png"
+        ogImage="https://geethakash.com/assets/img/og-img.png"
         siteName="GeethAkash"
         url="https://geethakash.com/"
-        socialImage="/assets/image/profile-img.png"
+        socialImage="https://geethakash.com/assets/img/profile-img.png"
       />
       <LayoutMain>
         <section className="w-full relative  bg-black">
