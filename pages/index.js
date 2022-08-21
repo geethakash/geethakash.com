@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import LayoutMain from '../components/layouts/LayoutMain';
 import { motion } from 'framer-motion';
@@ -131,8 +131,8 @@ const textRevealAnimation = {
 };
 
 function LandingText({ landingText = 'Frontend Developer' }) {
-  const [isLoading, setIsLoading] = React.useState(true);
-  React.useEffect(() => {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
