@@ -90,7 +90,7 @@ export default function IndexPage() {
               <div className="relative w-10/12 aspect-square  z-20 group">
                 <div className="w-full h-full bg-gray-800 rounded-md z-20 -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300"></div>
                 <img
-                  className="absolute top-0 left-0 w-full rounded-md border translate-x-2 -translate-y-2  border-gray-500 hover:border-transparent h-full object-cover transition-all duration-300"
+                  className="absolute top-0 left-0 w-full rounded-md border translate-x-2 -translate-y-2  border-gray-500  h-full object-cover transition-all duration-300"
                   src="/assets/img/profile-img.png"
                 />
               </div>
@@ -125,7 +125,7 @@ const textRevealAnimation = {
     y: 0,
     transition: {
       ease: [0.6, 0.01, -0.05, 0.95],
-      duration: 1,
+      duration: 0.8,
     },
   },
 };
@@ -141,7 +141,7 @@ function LandingText({ landingText = 'Frontend Developer' }) {
     <div className="mt-5 ">
       <h1
         className={`${
-          !isLoading ? 'landing-text' : 'text-white '
+          !isLoading ? 'landing-text text-transparent' : 'text-white '
         } w-full font-bold   text-5xl lg:text-8xl tracking-wider `}
       >
         {landingText.split(' ').map((word, wrdindex) => (
