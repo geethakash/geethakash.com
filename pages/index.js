@@ -97,6 +97,7 @@ export default function IndexPage() {
                 <img
                   className="absolute top-0 left-0 w-full rounded-md border translate-x-2 -translate-y-2  border-gray-500  h-full object-cover transition-all duration-300"
                   src="/assets/img/profile-img.png"
+                  alt="Akash Geethanjana"
                 />
               </div>
             </div>
