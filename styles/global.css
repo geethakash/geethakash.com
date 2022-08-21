@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.landing-text {
+  /* backgrsound: linear-gradient(96.62deg, #6588f6 0%, #fda085 96.94%); */
+  background: linear-gradient(
+    45deg,
+    white,
+    white,
+    #6588f6,
+    #fda085,
+    #a8edea,
+    #fed6e3,
+    #df89b5,
+    #bfd9fe
+  );
+
+  background-size: 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textanimations 10s ease infinite;
+}
+
+@keyframes textanimations {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+  display: none;
+}
