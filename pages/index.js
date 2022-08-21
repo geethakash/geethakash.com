@@ -7,7 +7,7 @@ export default function IndexPage() {
   return (
     <>
       <Head>
-        <title>Akash Geethanjana</title>
+        <title>Akash Geethanjana | Frontend Developer</title>
       </Head>
       <LayoutMain>
         <section className="w-full relative  bg-black">
