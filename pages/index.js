@@ -151,25 +151,27 @@ function LandingText({ landingText = 'Frontend Developer' }) {
         } w-full font-bold   text-5xl lg:text-8xl tracking-wider `}
       >
         {landingText.split(' ').map((word, wrdindex) => (
-          <motion.span
-            variants={titleAnimation}
-            initial="initial"
-            animate="animate"
-            key={wrdindex}
-            className={` overflow-hidden inline-block ${
-              wrdindex === 0 ? '' : 'uppercase '
-            }`}
-          >
-            {[...word].map((letter, index) => (
-              <motion.span
-                className="inline-block -translate-y-10"
-                variants={textRevealAnimation}
-                key={index}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </motion.span>
+          <>
+            <motion.span
+              variants={titleAnimation}
+              initial="initial"
+              animate="animate"
+              key={wrdindex}
+              className={` overflow-hidden inline-block ${
+                wrdindex === 0 ? '' : 'uppercase '
+              }`}
+            >
+              {[...word].map((letter, index) => (
+                <motion.span
+                  className="inline-block -translate-y-10"
+                  variants={textRevealAnimation}
+                  key={index}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </motion.span>{' '}
+          </>
         ))}
       </h1>
     </div>
