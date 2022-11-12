@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { LayoutMain, Head } from '../components';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { LayoutMain, Head } from "../components";
 
 export default function IndexPage() {
   return (
@@ -16,7 +16,7 @@ export default function IndexPage() {
       />
       <LayoutMain>
         <section className="w-full relative  bg-black">
-          <div className="flex flex-col lg:flex-row container justify-center items-center mx-auto px-10 lg:px-20 pt-32">
+          <div className="flex flex-col lg:flex-row container justify-center items-center mx-auto px-10 lg:px-20 pt-32 2xl:pt-52">
             <div className="lg:w-2/3">
               <LandingText />
               <div className="mt-8 lg:mt-5">
@@ -126,7 +126,7 @@ const titleAnimation = {
 };
 
 const textRevealAnimation = {
-  initial: { y: 100 },
+  initial: { y: 130 },
   animate: {
     y: 0,
     transition: {
@@ -136,7 +136,7 @@ const textRevealAnimation = {
   },
 };
 
-function LandingText({ landingText = 'Frontend Developer' }) {
+function LandingText({ landingText = "Frontend Developer" }) {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -147,10 +147,10 @@ function LandingText({ landingText = 'Frontend Developer' }) {
     <div className="mt-5 ">
       <h1
         className={`${
-          !isLoading ? 'landing-text text-transparent' : 'text-white '
-        } w-full font-bold   text-5xl lg:text-8xl tracking-wider `}
+          !isLoading ? "landing-text text-transparent" : "text-white "
+        } w-full font-bold   text-5xl lg:text-8xl 2xl:text-9xl tracking-wider `}
       >
-        {landingText.split(' ').map((word, wrdindex) => (
+        {landingText.split(" ").map((word, wrdindex) => (
           <>
             <motion.span
               variants={titleAnimation}
@@ -158,7 +158,7 @@ function LandingText({ landingText = 'Frontend Developer' }) {
               animate="animate"
               key={wrdindex}
               className={` overflow-hidden inline-block ${
-                wrdindex === 0 ? '' : 'uppercase '
+                wrdindex === 0 ? "" : "uppercase "
               }`}
             >
               {[...word].map((letter, index) => (
@@ -170,7 +170,7 @@ function LandingText({ landingText = 'Frontend Developer' }) {
                   {letter}
                 </motion.span>
               ))}
-            </motion.span>{' '}
+            </motion.span>{" "}
           </>
         ))}
       </h1>
