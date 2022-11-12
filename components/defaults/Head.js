@@ -1,5 +1,6 @@
-import Head from 'next/head';
-import React from 'react';
+import Head from "next/head";
+import React from "react";
+import Script from "next/script";
 
 export default function CustomHead({
   title,
@@ -18,14 +19,14 @@ export default function CustomHead({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
 
-      <meta property="og:type" content={type ? type : 'website'} />
+      <meta property="og:type" content={type ? type : "website"} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:image:width" content={'1200'} />
-      <meta property="og:image:height" content={'630'} />
+      <meta property="og:image:width" content={"1200"} />
+      <meta property="og:image:height" content={"630"} />
       <meta property="og:locale" content="en_US" />
 
       <meta
@@ -61,6 +62,22 @@ export default function CustomHead({
         href="/assets/img/favicon-16x16.png"
       />
       <link rel="manifest" href="/assets/site.webmanifest" />
+
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-D6VK82MPQ8"
+      ></Script>
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-D6VK82MPQ8');
+                  `,
+        }}
+      ></Script>
     </Head>
   );
 }
