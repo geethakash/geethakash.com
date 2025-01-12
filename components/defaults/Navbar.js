@@ -1,4 +1,5 @@
 import React from 'react';
+import NavbarButton from './NavbarButton';
 
 function Navbar() {
   const [isSideMenuOpen, setIsSideMenuOpen] = React.useState(false);
@@ -11,10 +12,7 @@ function Navbar() {
           </span>
         </a>
 
-        <div className="w-8 h-10 flex justify-center items-center flex-col gap-y-2">
-          <div className="w-full h-[2px] bg-gray-400 -translate-x-2"></div>
-          <div className="w-full h-[2px] bg-gray-400 translate-x-2"></div>
-        </div>
+        <NavbarButton/>
       </div>
     </nav>
   );

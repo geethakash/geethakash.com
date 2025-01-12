@@ -6,6 +6,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  @apply bg-black;
 }
 
 .landing-text {
@@ -22,14 +23,14 @@ body {
     #bfd9fe
   );
 
-  background-size: 600%;
+  background-size: 900%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: textanimations 10s ease infinite;
+  animation: textanimations 8s ease infinite;
 }
 
 @keyframes textanimations {
