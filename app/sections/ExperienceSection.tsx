@@ -6,7 +6,7 @@ import { motion, useInView } from "framer-motion";
 const experiences = [
   {
     company: "PromiseQ GmbH",
-    role: "Full-Stack Developer",
+    role: "Frontend Engineer",
     type: "Remote",
     period: "Feb 2025 - Nov 2025",
     description:

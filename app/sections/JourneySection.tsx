@@ -37,7 +37,7 @@ const journeyEvents = [
   {
     year: "2025",
     title: "PromiseQ GmbH — Remote",
-    desc: "Full-Stack Developer (Remote) on promiseQube edge AI devices and promiseQ Cloud — a platform for monitoring edge computing infrastructure globally.",
+    desc: "Frontend Engineer (Remote) on promiseQube edge AI devices and promiseQ Cloud — a platform for monitoring edge computing infrastructure globally.",
     tech: ["Next.js", "TypeScript", "Docusaurus", "REST APIs"],
   },
 ];

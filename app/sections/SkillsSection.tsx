@@ -10,7 +10,7 @@ const categories = [
   },
   {
     label: "Frontend",
-    items: ["React", "Next.js", "Tailwind CSS", "Sass", "GSAP", "Framer Motion"],
+    items: ["React", "Next.js", "Tailwind CSS", "SASS", "GSAP", "Framer Motion"],
   },
   {
     label: "Backend",

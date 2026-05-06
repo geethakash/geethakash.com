@@ -84,7 +84,7 @@ A **Centralized Building Energy Optimization & Automation System**
 
 ### 🌍 PromiseQ GmbH
 
-**Full-Stack Developer (Remote)**
+**Frontend Engineer (Remote)**
 📅 Feb 2025 – Nov 2025
 
 Worked on:
