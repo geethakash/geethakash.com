@@ -50,8 +50,8 @@ function AnimatedWord({ text, className = "" }: { text: string; className?: stri
 }
 
 const roles = [
-  "FRONTEND ENGINEER",
   "FULL-STACK DEVELOPER",
+  "SOFTWARE ENGINEER",
   "IOT ENTHUSIAST",
   "WEB ANIMATOR",
 ];
@@ -147,8 +147,8 @@ export default function HeroSection() {
             <p className="max-w-md text-sm leading-relaxed text-foreground font-mono">
               <TypewriterRole texts={roles} />
               <br />
-              <span className="text-[#3a3a52] mt-1 block">
-                Frontend Engineer &amp; Full-Stack Developer passionate about
+              <span className="text-foreground mt-1 block">
+                Full-Stack Developer passionate about software engineering,
                 building scalable web applications, crafting smooth user
                 experiences, and experimenting with IoT systems.
               </span>

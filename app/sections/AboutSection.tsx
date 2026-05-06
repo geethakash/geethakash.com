@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const highlights = [
-  { label: "EDUCATION", value: "BSc (Hons.) ICT", sub: "University of Kelaniya, Sri Lanka" },
+  { label: "EDUCATION", value: "BSc (Hons.) in Information and Communication Technology", sub: "University of Kelaniya, Sri Lanka" },
   { label: "LOCATION", value: "Sri Lanka 🇱🇰", sub: "Open to remote globally" },
   { label: "STARTED", value: "2019", sub: "6+ years building software" },
 ];
@@ -30,28 +30,28 @@ export default function AboutSection() {
               Engineering<br />with purpose.
             </h2>
             <p className="text-sm text-foreground leading-relaxed mb-4">
-              I&apos;m a Frontend Engineer and Full-Stack Developer who loves building
+              I&apos;m a Full-Stack Developer passionate about software engineering, who loves building
               scalable web applications with smooth, engaging user experiences.
-              From IoT real-time dashboards to SaaS platforms — I&apos;ve shipped it all.
+              {/* From IoT real-time dashboards to SaaS platforms — I&apos;ve shipped it all. */}
             </p>
             <p className="text-sm text-foreground leading-relaxed mb-8">
               My journey started with{" "}
               <span className="text-surgical-white">C# and CLI tools in 2019</span>, evolved
               through <span className="text-surgical-white">building LMS platforms</span> during COVID,
-              and today I craft enterprise-grade frontends with{" "}
-              <span className="text-volt">Next.js, GSAP, and Framer Motion</span>.
+              and today I craft enterprise-grade frontends with modern web technologies.
+              {/* <span className="text-volt">Next.js, GSAP, and Framer Motion</span>. */}
             </p>
 
             {/* Stats */}
             <div className="flex gap-10">
               {[
-                { num: "6+", label: "Yrs Coding" },
+                { num: "5+", label: "Yrs Coding" },
                 { num: "10+", label: "Projects" },
                 { num: "2", label: "Companies" },
               ].map(({ num, label }) => (
                 <div key={label}>
                   <div className="text-3xl font-medium text-volt tracking-tight">{num}</div>
-                  <div className="font-mono text-[10px] text-foreground/60 uppercase tracking-widest mt-1">{label}</div>
+                  <div className="font-mono text-[10px] text-surgical-white/80 uppercase tracking-widest mt-1">{label}</div>
                 </div>
               ))}
             </div>

@@ -22,7 +22,7 @@ const projects = [
     description:
       "Centralized Building Energy Optimization & Automation System. IoT-based architecture with real-time monitoring via MQTT/WebSockets.",
     tags: ["IoT", "WebSockets", "MQTT", "React"],
-    year: "2023",
+    year: "2025",
   },
   {
     id: "MOBILE-POS",
@@ -30,7 +30,7 @@ const projects = [
     description:
       "Complete business management system with multi-user auth, inventory management, repair tracking, marketing tools, and invoice delivery.",
     tags: ["Next.js", "MongoDB", "Node.js", "Prisma"],
-    year: "2023",
+    year: "2026",
   },
   {
     id: "TEC-LMS",
@@ -46,7 +46,7 @@ const projects = [
     description:
       "Point of Sale system designed for restaurants — fast, intuitive, and built for high-throughput order management.",
     tags: ["React", "Node.js", "MongoDB"],
-    year: "2022",
+    year: "2025",
   },
   {
     id: "AKAI-LEARN",
@@ -54,7 +54,7 @@ const projects = [
     description:
       "Course publishing platform connecting teachers and students with structured content delivery and progress tracking.",
     tags: ["Next.js", "TypeScript", "Tailwind", "Prisma"],
-    year: "2023",
+    year: "2025",
   },
 ];
 

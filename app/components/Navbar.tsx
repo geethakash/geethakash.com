@@ -49,8 +49,7 @@ export default function Navbar() {
           <a href="#" className="flex items-center gap-3 group">
             <div className="size-3 rounded-full bg-volt animate-pulse-glow" />
             <span className="font-mono text-sm tracking-tighter text-surgical-white font-bold uppercase">
-              AKASH{" "}
-              <span className="text-foreground font-normal">// FRONTEND ENGINEER</span>
+              GEETHAKASH
             </span>
           </a>
 

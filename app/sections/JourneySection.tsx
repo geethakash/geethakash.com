@@ -8,36 +8,36 @@ const journeyEvents = [
     year: "2019",
     title: "First Lines of Code",
     desc: "Started programming with C#, building CLI tools and Windows Forms applications. Discovered the power of software solving real-world problems.",
-    tech: ["C#", "Windows Forms", ".NET"],
+    tech: ["C#", "Windows Forms"],
   },
   {
     year: "2020",
     title: "Web Development Begins",
     desc: "Contributed to the frontend of Vidusaviya — an educational management system. First taste of building real user interfaces on production systems.",
-    tech: ["HTML", "CSS", "JavaScript"],
+    tech: ["HTML", "CSS"],
   },
   {
     year: "2021",
     title: "TecLMS — Independent Project",
     desc: "Built a Learning Management System during COVID-19 for secure educational material sharing, complete with auth and subject management.",
-    tech: ["Django", "JavaScript", "PostgreSQL"],
+    tech: ["Django", "SQLite", "HTML", "CSS", "JavaScript",],
   },
   {
     year: "2021",
     title: "Co-Founded Bitzquad",
     desc: "Co-founded a startup delivering information systems and business transformation. Shipped multiple client projects with advanced animations.",
-    tech: ["Next.js", "GSAP", "Framer Motion", "Tailwind"],
+    tech: ["React", "Next.js", "GSAP", "Framer Motion", "Tailwind"],
   },
   {
     year: "2022",
     title: "Premise Edge — BMS System",
     desc: "University project: a centralized Building Energy Optimization & Automation System with IoT-based architecture and real-time MQTT monitoring.",
-    tech: ["IoT", "MQTT", "WebSockets", "React"],
+    tech: ["MQTT", "IoT", "ESP32", "FastAPI", "WebSockets", "Next.js"],
   },
   {
     year: "2025",
     title: "PromiseQ GmbH — Remote",
-    desc: "Frontend Engineer (Remote) on promiseQube edge AI devices and promiseQ Cloud — a platform for monitoring edge computing infrastructure globally.",
+    desc: "Full-Stack Developer (Remote) on promiseQube edge AI devices and promiseQ Cloud — a platform for monitoring edge computing infrastructure globally.",
     tech: ["Next.js", "TypeScript", "Docusaurus", "REST APIs"],
   },
 ];
@@ -85,8 +85,8 @@ function TimelineItemCard({ event, index, sectionInView }: { event: any, index: 
           <span
             key={t}
             className={`text-[10px] px-2 py-0.5 font-mono uppercase border transition-all duration-500 ${isCentered
-                ? "bg-[#18181f] text-surgical-white/80 border-white/15"
-                : "bg-transparent text-surgical-white/30 border-white/5"
+              ? "bg-[#18181f] text-surgical-white/80 border-white/15"
+              : "bg-transparent text-surgical-white/30 border-white/5"
               }`}
           >
             {t}

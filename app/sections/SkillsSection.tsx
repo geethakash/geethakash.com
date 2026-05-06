@@ -58,7 +58,7 @@ export default function SkillsSection() {
                 Also_Familiar
               </h4>
               <ul className="text-sm font-mono text-surgical-white/50 space-y-2">
-                {["Figma", "Git", "Linux", "Raspberry Pi", "WebRTC", "Nginx", "Storybook", "CI/CD"].map((item) => (
+                {["Figma", "Git", "Linux", "Raspberry Pi", "Nginx", "Caddy", "CI/CD"].map((item) => (
                   <li key={item} className="tech-item">
                     {item}
                   </li>

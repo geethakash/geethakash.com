@@ -1,6 +1,6 @@
 # 👋 Hi, I'm Akash Geethanjana
 
-### 💻 Frontend Engineer | Full-Stack Developer | IoT Enthusiast
+### 💻 Full-Stack Developer | Software Engineer | IoT Enthusiast
 
 I’m a passionate developer who enjoys building scalable web applications, crafting smooth user experiences, and experimenting with IoT systems.
 
@@ -84,7 +84,7 @@ A **Centralized Building Energy Optimization & Automation System**
 
 ### 🌍 PromiseQ GmbH
 
-**Frontend Engineer (Remote)**
+**Full-Stack Developer (Remote)**
 📅 Feb 2025 – Nov 2025
 
 Worked on:
