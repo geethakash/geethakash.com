@@ -29,7 +29,12 @@ export default function Preloader() {
       setTimeout(() => {
         setIsLoading(false);
         document.body.style.overflow = "";
-      }, 400);
+        if (typeof window !== "undefined") {
+          (window as any).__PRELOADER_DONE__ = true;
+          console.log("preload")
+          window.dispatchEvent(new Event("preloader-finished"));
+        }
+      }, 500);
     };
 
     const handleLoad = () => {

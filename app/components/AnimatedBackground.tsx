@@ -14,7 +14,7 @@ export default function AnimatedBackground() {
   // Generate random stars on mount to avoid hydration mismatch
   useEffect(() => {
     setStars(
-      Array.from({ length: 500 }).map((_, i) => ({
+      Array.from({ length: 1000 }).map((_, i) => ({
         id: i,
         top: `${Math.random() * 100}%`,
         left: `${Math.random() * 100}%`,
@@ -39,8 +39,8 @@ export default function AnimatedBackground() {
 
       // Glow orbs floating
       gsap.to(".bg-orb", {
-        y: "random(-30, 30)",
-        x: "random(-20, 20)",
+        y: "random(-50, 50)",
+        x: "random(-30, 30)",
         duration: "random(8, 14)",
         ease: "sine.inOut",
         repeat: -1,
@@ -49,38 +49,74 @@ export default function AnimatedBackground() {
       });
 
       // Twinkling stars (per-particle recursive animation)
-      if (stars.length > 0) {
-        gsap.utils.toArray(".star").forEach((star: any) => {
-          // 1. Twinkle effect (opacity & scale)
-          const animateTwinkle = () => {
-            gsap.to(star, {
-              opacity: gsap.utils.random(0.05, 0.8),
-              scale: gsap.utils.random(0.5, 1.2),
-              duration: gsap.utils.random(2, 5),
-              delay: gsap.utils.random(0, 2),
-              ease: "sine.inOut",
-              onComplete: animateTwinkle,
-            });
-          };
+      const playStars = () => {
+        gsap.killTweensOf(".star");
 
-          // 2. Slow drifting effect (movement)
-          const animateDrift = () => {
-            gsap.to(star, {
-              x: gsap.utils.random(-25, 25),
-              y: gsap.utils.random(-25, 25),
-              duration: gsap.utils.random(10, 25),
-              ease: "sine.inOut",
-              onComplete: animateDrift,
-            });
-          };
+        if (stars.length > 0) {
+          gsap.utils.toArray(".star").forEach((star: any, i) => {
+            const targetTop = stars[i].top;
+            const targetLeft = stars[i].left;
 
-          // Initialize with a random delay so they don't all start at exactly time 0
-          setTimeout(() => {
-            animateTwinkle();
-            animateDrift();
-          }, gsap.utils.random(0, 3000));
-        });
+            // 1. Twinkle effect (opacity & scale)
+            const animateTwinkle = () => {
+              gsap.to(star, {
+                opacity: gsap.utils.random(0.05, 0.8),
+                scale: gsap.utils.random(0.5, 1.2),
+                duration: gsap.utils.random(2, 5),
+                delay: gsap.utils.random(0, 2),
+                ease: "sine.inOut",
+                onComplete: animateTwinkle,
+              });
+            };
+
+            // 2. Slow drifting effect (movement)
+            const animateDrift = () => {
+              gsap.to(star, {
+                x: gsap.utils.random(-25, 25),
+                y: gsap.utils.random(-25, 25),
+                duration: gsap.utils.random(2, 10),
+                ease: "sine.inOut",
+                onComplete: animateDrift,
+              });
+            };
+
+            // Shoot from center on load
+            gsap.fromTo(
+              star,
+              { top: "50%", left: "50%", opacity: 0, scale: 0, x: 0, y: 0 },
+              {
+                top: targetTop,
+                left: targetLeft,
+                opacity: 1,
+                scale: 1,
+                duration: gsap.utils.random(1.5, 3.5),
+                ease: "power4.out",
+                delay: gsap.utils.random(0, 0.5),
+                onComplete: () => {
+                  animateTwinkle();
+                  animateDrift();
+                },
+              }
+            );
+          });
+        }
+      };
+
+      if (typeof window !== "undefined") {
+        if ((window as any).__PRELOADER_DONE__) {
+          playStars();
+        } else {
+          window.addEventListener("preloader-finished", playStars);
+        }
+        window.addEventListener("replay-animations", playStars);
       }
+
+      return () => {
+        if (typeof window !== "undefined") {
+          window.removeEventListener("preloader-finished", playStars);
+          window.removeEventListener("replay-animations", playStars);
+        }
+      };
     },
     { scope: containerRef, dependencies: [stars] }
   );
