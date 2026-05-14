@@ -47,6 +47,7 @@ export const metadata: Metadata = {
 };
 
 import SmoothScroll from "./components/SmoothScroll";
+import Preloader from "./components/Preloader";
 
 export default function RootLayout({
   children,
@@ -59,6 +60,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body className="bg-[#050510] text-[#f1f5f9] overflow-x-hidden antialiased">
+        <Preloader />
         <SmoothScroll>
           {children}
         </SmoothScroll>

@@ -11,7 +11,7 @@ import { motion, Variants } from "framer-motion";
 const titleAnimation: Variants = {
   animate: {
     transition: {
-      delayChildren: 0.1,
+      delayChildren: 1.2,
       staggerChildren: 0.05,
     },
   },
@@ -105,16 +105,16 @@ export default function HeroSection() {
     () => {
       // h1 is now animated using framer-motion
       gsap.from(".hero-sub", {
-        opacity: 0, y: 30, duration: 0.8, ease: "power3.out", delay: 0.35,
+        opacity: 0, y: 30, duration: 0.8, ease: "power3.out", delay: 1.7,
       });
       gsap.from(".hero-cta", {
-        opacity: 0, y: 20, duration: 0.7, ease: "power2.out", delay: 0.55,
+        opacity: 0, y: 20, duration: 0.7, ease: "power2.out", delay: 1.9,
       });
       gsap.from(".hero-meta", {
-        opacity: 0, duration: 0.8, delay: 0.65,
+        opacity: 0, duration: 0.8, delay: 2.0,
       });
       gsap.from(".hero-scroll", {
-        opacity: 0, y: 10, duration: 0.6, delay: 1.0,
+        opacity: 0, y: 10, duration: 0.6, delay: 2.4,
       });
     },
     { scope: containerRef }

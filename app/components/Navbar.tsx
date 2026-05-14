@@ -46,7 +46,14 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <a 
+            href="/" 
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/";
+            }}
+            className="flex items-center gap-3 group"
+          >
             <div className="size-3 rounded-full bg-volt animate-pulse-glow" />
             <span className="font-mono text-sm tracking-tighter text-surgical-white font-bold uppercase">
               GEETHAKASH

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const highlights = [
-  { label: "EDUCATION", value: "BSc (Hons.) in Information and Communication Technology", sub: "University of Kelaniya, Sri Lanka" },
+  { label: "EDUCATION", value: "BSc (Hons.) in Information and Communication Technology (UG)", sub: "University of Kelaniya, Sri Lanka" },
   { label: "LOCATION", value: "Sri Lanka 🇱🇰", sub: "Open to remote globally" },
   { label: "STARTED", value: "2019", sub: "6+ years building software" },
 ];
@@ -84,8 +84,7 @@ export default function AboutSection() {
               <p className="text-sm text-foreground leading-relaxed">
                 I love combining{" "}
                 <span className="text-surgical-white">hardware + software</span> to build
-                smart systems that interact with the real world — think MQTT,
-                WebSockets, and Raspberry Pi.
+                smart systems that interact with the real world.
               </p>
             </div>
           </motion.div>

@@ -8,7 +8,7 @@ I’m a passionate developer who enjoys building scalable web applications, craf
 
 ## 🎓 Education
 
-### Bachelor (Hons.) in Information and Communication Technology  
+### Bachelor (Hons.) in Information and Communication Technology (UG) 
 **Faculty of Computing and Technology**  
 **University of Kelaniya, Sri Lanka**
 
