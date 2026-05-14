@@ -6,7 +6,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="section-border bg-[#0a0a0f] py-16">
+    <footer id="footer" className="section-border bg-[#0a0a0f] py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
           {/* Left: CTA copy */}

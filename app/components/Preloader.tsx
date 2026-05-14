@@ -12,6 +12,9 @@ export default function Preloader() {
     document.body.style.overflow = "hidden";
 
     let currentProgress = 0;
+    let isFinished = false;
+    let fallbackTimer: NodeJS.Timeout;
+
     // Animate progress to 90% while waiting for page load
     const progressInterval = setInterval(() => {
       currentProgress += Math.floor(Math.random() * 8) + 2;
@@ -23,7 +26,12 @@ export default function Preloader() {
     }, 40);
 
     const finishLoading = () => {
+      if (isFinished) return;
+      isFinished = true;
+
       clearInterval(progressInterval);
+      if (fallbackTimer) clearTimeout(fallbackTimer);
+      
       setProgress(100);
       // Wait a moment at 100% before fading out
       setTimeout(() => {
@@ -47,13 +55,13 @@ export default function Preloader() {
     } else {
       window.addEventListener("load", handleLoad);
       // Fallback timer just in case
-      const fallbackTimer = setTimeout(() => {
+      fallbackTimer = setTimeout(() => {
         finishLoading();
       }, 4000);
 
       return () => {
         window.removeEventListener("load", handleLoad);
-        clearTimeout(fallbackTimer);
+        if (fallbackTimer) clearTimeout(fallbackTimer);
         clearInterval(progressInterval);
       };
     }

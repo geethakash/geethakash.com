@@ -28,12 +28,12 @@ const textRevealAnimation: Variants = {
   },
 };
 
-function AnimatedWord({ text, className = "", delayOffset = 0 }: { text: string; className?: string; delayOffset?: number }) {
+function AnimatedWord({ text, className = "", delayOffset = 0, isReady = true }: { text: string; className?: string; delayOffset?: number; isReady?: boolean }) {
   return (
     <motion.span
       variants={titleAnimation(delayOffset)}
       initial="initial"
-      animate="animate"
+      animate={isReady ? "animate" : "initial"}
       className={`inline-block overflow-hidden align-bottom ${className}`}
     >
       {[...text].map((letter, index) => (
@@ -56,10 +56,12 @@ const roles = [
   "WEB ANIMATOR",
 ];
 
-function TypewriterRole({ texts }: { texts: string[] }) {
+function TypewriterRole({ texts, isReady = true }: { texts: string[]; isReady?: boolean }) {
   const spanRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    if (!isReady) return;
+
     let index = 0;
     let phase: "typing" | "pausing" | "erasing" = "typing";
     let charIndex = 0;
@@ -96,7 +98,7 @@ function TypewriterRole({ texts }: { texts: string[] }) {
     loop();
 
     return () => clearTimeout(timeout);
-  }, [texts]);
+  }, [texts, isReady]);
 
   return (
     <span className="text-volt">
@@ -110,6 +112,19 @@ export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [animationKey, setAnimationKey] = useState(0);
   const [isReplay, setIsReplay] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if ((window as any).__PRELOADER_DONE__) {
+        setIsReady(true);
+      } else {
+        const handlePreloader = () => setIsReady(true);
+        window.addEventListener("preloader-finished", handlePreloader);
+        return () => window.removeEventListener("preloader-finished", handlePreloader);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const handleReplay = () => {
@@ -120,24 +135,28 @@ export default function HeroSection() {
     return () => window.removeEventListener("replay-animations", handleReplay);
   }, []);
 
-  const delayOffset = isReplay ? 0 : 1.4;
+  const delayOffset = isReplay ? 0 : 0.4;
 
   useGSAP(
     () => {
-      gsap.from(".hero-sub", {
-        opacity: 0, y: 30, duration: 0.8, ease: "power3.out", delay: delayOffset + 0.35,
+      if (!isReady) {
+        gsap.set([".hero-sub", ".hero-cta", ".hero-meta", ".hero-scroll"], { opacity: 0 });
+        return;
+      }
+      gsap.fromTo(".hero-sub", { opacity: 0, y: 30 }, {
+        opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: delayOffset + 0.35,
       });
-      gsap.from(".hero-cta", {
-        opacity: 0, y: 20, duration: 0.7, ease: "power2.out", delay: delayOffset + 0.55,
+      gsap.fromTo(".hero-cta", { opacity: 0, y: 20 }, {
+        opacity: 1, y: 0, duration: 0.7, ease: "power2.out", delay: delayOffset + 0.55,
       });
-      gsap.from(".hero-meta", {
-        opacity: 0, duration: 0.8, delay: delayOffset + 0.65,
+      gsap.fromTo(".hero-meta", { opacity: 0 }, {
+        opacity: 1, duration: 0.8, delay: delayOffset + 0.65,
       });
-      gsap.from(".hero-scroll", {
-        opacity: 0, y: 10, duration: 0.6, delay: delayOffset + 1.0,
+      gsap.fromTo(".hero-scroll", { opacity: 0, y: 10 }, {
+        opacity: 1, y: 0, duration: 0.6, delay: delayOffset + 1.0,
       });
     },
-    { scope: containerRef, dependencies: [animationKey, delayOffset] }
+    { scope: containerRef, dependencies: [animationKey, delayOffset, isReady] }
   );
 
   return (
@@ -158,15 +177,15 @@ export default function HeroSection() {
         {/* Main heading */}
         <div className="space-y-6">
           <h1 className="hero-h1 text-[clamp(4rem,12vw,10rem)] font-medium text-surgical-white tracking-tighter leading-[0.85]">
-            <AnimatedWord text="AKASH" delayOffset={delayOffset} />
+            <AnimatedWord text="AKASH" delayOffset={delayOffset} isReady={isReady} />
             <br />
-            <AnimatedWord text="GEETHANJANA" className="text-volt" delayOffset={delayOffset} />
+            <AnimatedWord text="GEETHANJANA" className="text-volt" delayOffset={delayOffset} isReady={isReady} />
           </h1>
 
           {/* Role typewriter + divider */}
           <div className="hero-sub flex items-center gap-6">
             <p className="max-w-md text-sm leading-relaxed text-foreground font-mono">
-              <TypewriterRole texts={roles} />
+              <TypewriterRole texts={roles} isReady={isReady} />
               <br />
               <span className="text-foreground mt-1 block">
                 Full-Stack Developer passionate about software engineering,

@@ -6,8 +6,8 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Journey", href: "#journey" },
-  { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "Projects", href: "#projects" },
   { label: "Stack", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
@@ -16,6 +16,19 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if ((window as any).__PRELOADER_DONE__) {
+        setIsReady(true);
+      } else {
+        const handlePreloader = () => setIsReady(true);
+        window.addEventListener("preloader-finished", handlePreloader);
+        return () => window.removeEventListener("preloader-finished", handlePreloader);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -23,9 +36,12 @@ export default function Navbar() {
       const ids = navLinks.map((l) => l.href.slice(1));
       for (const id of [...ids].reverse()) {
         const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 100) {
-          setActive(id);
-          break;
+        if (el) {
+          const absoluteTop = el.getBoundingClientRect().top + window.scrollY;
+          if (window.scrollY >= absoluteTop - 100) {
+            setActive(id);
+            break;
+          }
         }
       }
     };
@@ -36,9 +52,9 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ y: -80, opacity: 0 }}
+        animate={isReady ? { y: 0, opacity: 1 } : { y: -60, opacity: 0 }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 w-full z-50 border-b transition-all duration-300 ${scrolled
           ? "border-white/7 bg-[#0a0a0f]/90 backdrop-blur-md"
           : "border-transparent bg-transparent"
@@ -46,8 +62,8 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
           {/* Logo */}
-          <a 
-            href="/" 
+          <a
+            href="/"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });

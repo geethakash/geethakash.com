@@ -20,7 +20,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact-form" ref={ref} className="py-24 section-border">
+    <section id="contact" ref={ref} className="py-24 section-border">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -123,7 +123,7 @@ export default function ContactSection() {
                       value={form[key as keyof typeof form]}
                       onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                       placeholder={placeholder}
-                      className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-[#3a3a52] text-sm font-mono focus:outline-none focus:border-[#aaff00]/30 transition-colors"
+                      className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-sm font-mono focus:outline-none focus:border-[#aaff00]/30 transition-colors"
                     />
                   </div>
                 ))}
@@ -138,7 +138,7 @@ export default function ContactSection() {
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     placeholder="Tell me about your project or just say hi..."
-                    className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-[#3a3a52] text-sm font-mono focus:outline-none focus:border-[#aaff00]/30 transition-colors resize-none"
+                    className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-sm font-mono focus:outline-none focus:border-[#aaff00]/30 transition-colors resize-none"
                   />
                 </div>
                 <motion.button
