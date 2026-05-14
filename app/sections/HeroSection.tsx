@@ -8,14 +8,14 @@ gsap.registerPlugin(useGSAP);
 
 import { motion, Variants } from "framer-motion";
 
-const titleAnimation: Variants = {
+const titleAnimation = (delayOffset: number): Variants => ({
   animate: {
     transition: {
-      delayChildren: 1.2,
+      delayChildren: delayOffset + 0.1,
       staggerChildren: 0.05,
     },
   },
-};
+});
 
 const textRevealAnimation: Variants = {
   initial: { y: "150%" },
@@ -28,17 +28,17 @@ const textRevealAnimation: Variants = {
   },
 };
 
-function AnimatedWord({ text, className = "" }: { text: string; className?: string }) {
+function AnimatedWord({ text, className = "", delayOffset = 0 }: { text: string; className?: string; delayOffset?: number }) {
   return (
     <motion.span
-      variants={titleAnimation}
+      variants={titleAnimation(delayOffset)}
       initial="initial"
       animate="animate"
       className={`inline-block overflow-hidden align-bottom ${className}`}
     >
       {[...text].map((letter, index) => (
         <motion.span
-          className="inline-block"
+          className="inline-block will-change-transform"
           variants={textRevealAnimation}
           key={index}
         >
@@ -57,42 +57,50 @@ const roles = [
 ];
 
 function TypewriterRole({ texts }: { texts: string[] }) {
-  const [index, setIndex] = useState(0);
-  const [displayed, setDisplayed] = useState("");
-  const [phase, setPhase] = useState<"typing" | "pausing" | "erasing">("typing");
-  const charRef = useRef(0);
+  const spanRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const current = texts[index];
-    let t: ReturnType<typeof setTimeout>;
-    if (phase === "typing") {
-      if (charRef.current < current.length) {
-        t = setTimeout(() => {
-          charRef.current += 1;
-          setDisplayed(current.slice(0, charRef.current));
-        }, 60);
+    let index = 0;
+    let phase: "typing" | "pausing" | "erasing" = "typing";
+    let charIndex = 0;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const loop = () => {
+      const current = texts[index];
+      
+      if (phase === "typing") {
+        if (charIndex < current.length) {
+          charIndex++;
+          if (spanRef.current) spanRef.current.textContent = current.slice(0, charIndex);
+          timeout = setTimeout(loop, 60);
+        } else {
+          phase = "pausing";
+          timeout = setTimeout(loop, 2000);
+        }
+      } else if (phase === "pausing") {
+        phase = "erasing";
+        timeout = setTimeout(loop, 300);
       } else {
-        t = setTimeout(() => setPhase("pausing"), 2000);
+        if (charIndex > 0) {
+          charIndex--;
+          if (spanRef.current) spanRef.current.textContent = current.slice(0, charIndex);
+          timeout = setTimeout(loop, 30);
+        } else {
+          index = (index + 1) % texts.length;
+          phase = "typing";
+          timeout = setTimeout(loop, 60);
+        }
       }
-    } else if (phase === "pausing") {
-      t = setTimeout(() => setPhase("erasing"), 300);
-    } else {
-      if (charRef.current > 0) {
-        t = setTimeout(() => {
-          charRef.current -= 1;
-          setDisplayed(current.slice(0, charRef.current));
-        }, 30);
-      } else {
-        setIndex((i) => (i + 1) % texts.length);
-        setPhase("typing");
-      }
-    }
-    return () => clearTimeout(t);
-  }, [phase, displayed, index, texts]);
+    };
+
+    loop();
+
+    return () => clearTimeout(timeout);
+  }, [texts]);
 
   return (
     <span className="text-volt">
-      {displayed}
+      <span ref={spanRef}></span>
       <span className="cursor-blink" />
     </span>
   );
@@ -100,28 +108,41 @@ function TypewriterRole({ texts }: { texts: string[] }) {
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [animationKey, setAnimationKey] = useState(0);
+  const [isReplay, setIsReplay] = useState(false);
+
+  useEffect(() => {
+    const handleReplay = () => {
+      setIsReplay(true);
+      setAnimationKey(prev => prev + 1);
+    };
+    window.addEventListener("replay-animations", handleReplay);
+    return () => window.removeEventListener("replay-animations", handleReplay);
+  }, []);
+
+  const delayOffset = isReplay ? 0 : 1.4;
 
   useGSAP(
     () => {
-      // h1 is now animated using framer-motion
       gsap.from(".hero-sub", {
-        opacity: 0, y: 30, duration: 0.8, ease: "power3.out", delay: 1.7,
+        opacity: 0, y: 30, duration: 0.8, ease: "power3.out", delay: delayOffset + 0.35,
       });
       gsap.from(".hero-cta", {
-        opacity: 0, y: 20, duration: 0.7, ease: "power2.out", delay: 1.9,
+        opacity: 0, y: 20, duration: 0.7, ease: "power2.out", delay: delayOffset + 0.55,
       });
       gsap.from(".hero-meta", {
-        opacity: 0, duration: 0.8, delay: 2.0,
+        opacity: 0, duration: 0.8, delay: delayOffset + 0.65,
       });
       gsap.from(".hero-scroll", {
-        opacity: 0, y: 10, duration: 0.6, delay: 2.4,
+        opacity: 0, y: 10, duration: 0.6, delay: delayOffset + 1.0,
       });
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [animationKey, delayOffset] }
   );
 
   return (
     <section
+      key={animationKey}
       id="hero"
       ref={containerRef}
       className="relative mx-auto min-h-screen flex flex-col justify-center pt-14"
@@ -137,9 +158,9 @@ export default function HeroSection() {
         {/* Main heading */}
         <div className="space-y-6">
           <h1 className="hero-h1 text-[clamp(4rem,12vw,10rem)] font-medium text-surgical-white tracking-tighter leading-[0.85]">
-            <AnimatedWord text="AKASH" />
+            <AnimatedWord text="AKASH" delayOffset={delayOffset} />
             <br />
-            <AnimatedWord text="GEETHANJANA" className="text-volt" />
+            <AnimatedWord text="GEETHANJANA" className="text-volt" delayOffset={delayOffset} />
           </h1>
 
           {/* Role typewriter + divider */}

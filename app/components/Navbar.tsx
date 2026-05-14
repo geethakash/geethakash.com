@@ -50,7 +50,8 @@ export default function Navbar() {
             href="/" 
             onClick={(e) => {
               e.preventDefault();
-              window.location.href = "/";
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.dispatchEvent(new Event("replay-animations"));
             }}
             className="flex items-center gap-3 group"
           >
