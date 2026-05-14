@@ -67,7 +67,7 @@ function TypewriterRole({ texts }: { texts: string[] }) {
 
     const loop = () => {
       const current = texts[index];
-      
+
       if (phase === "typing") {
         if (charIndex < current.length) {
           charIndex++;
@@ -149,11 +149,11 @@ export default function HeroSection() {
     >
       <div className="max-w-7xl mx-auto w-full px-6 flex flex-col justify-center flex-1 relative">
         {/* Top-right metadata — template style */}
-        <div className="hero-meta absolute top-20 right-6 font-mono text-[10px] text-foreground/50 space-y-1 hidden md:block text-right">
-          <p>STATUS: AVAILABLE</p>
-          <p>LOCATION: SRI_LANKA</p>
-          <p>STACK: REACT / NEXT / IOT</p>
-        </div>
+        {/* <div className="hero-meta absolute top-20 right-6 font-mono text-[10px] text-foreground/50 space-y-1 hidden md:block text-right">
+          <p>CODE</p>
+          <p>CREATE</p>
+          <p>SOLVE</p>
+        </div> */}
 
         {/* Main heading */}
         <div className="space-y-6">

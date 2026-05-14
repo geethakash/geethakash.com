@@ -76,7 +76,7 @@ export default function ContactSection() {
             </div>
 
             {/* Availability */}
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <motion.div
                 className="size-2 rounded-full bg-volt"
                 animate={{ opacity: [1, 0.3, 1] }}
@@ -85,7 +85,7 @@ export default function ContactSection() {
               <span className="font-mono text-xs text-foreground/60 uppercase tracking-widest">
                 Available for full-time &amp; freelance
               </span>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Right: form */}
