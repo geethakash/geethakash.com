@@ -48,6 +48,22 @@ export default function AnimatedBackground() {
         stagger: 15,
       });
 
+      // Mouse move parallax effect
+      const starsXTo = gsap.quickTo(".mouse-parallax-stars", "x", { duration: 1, ease: "power3" });
+      const starsYTo = gsap.quickTo(".mouse-parallax-stars", "y", { duration: 1, ease: "power3" });
+      const orbsXTo = gsap.quickTo(".mouse-parallax-orbs", "x", { duration: 1.5, ease: "power3" });
+      const orbsYTo = gsap.quickTo(".mouse-parallax-orbs", "y", { duration: 1.5, ease: "power3" });
+
+      const handleMouseMove = (e: MouseEvent) => {
+        const x = (e.clientX / window.innerWidth - 0.5);
+        const y = (e.clientY / window.innerHeight - 0.5);
+        
+        starsXTo(x * -50);
+        starsYTo(y * -50);
+        orbsXTo(x * -20);
+        orbsYTo(y * -20);
+      };
+
       // Twinkling stars (per-particle recursive animation)
       const playStars = () => {
         gsap.killTweensOf(".star");
@@ -103,6 +119,7 @@ export default function AnimatedBackground() {
       };
 
       if (typeof window !== "undefined") {
+        window.addEventListener("mousemove", handleMouseMove);
         if ((window as any).__PRELOADER_DONE__) {
           playStars();
         } else {
@@ -113,6 +130,7 @@ export default function AnimatedBackground() {
 
       return () => {
         if (typeof window !== "undefined") {
+          window.removeEventListener("mousemove", handleMouseMove);
           window.removeEventListener("preloader-finished", playStars);
           window.removeEventListener("replay-animations", playStars);
         }
@@ -128,7 +146,7 @@ export default function AnimatedBackground() {
     >
       <div className="parallax-bg absolute -inset-y-[100vh] inset-x-0 w-full">
         {/* Twinkling stars layer */}
-        <div className="absolute inset-0">
+        <div className="mouse-parallax-stars absolute inset-0">
           {stars.map((star) => (
             <div
               key={star.id}
@@ -143,21 +161,24 @@ export default function AnimatedBackground() {
           ))}
         </div>
 
-        {/* Very subtle volt glow top-left */}
-        <div
-          className="bg-orb absolute rounded-full blur-[120px] opacity-[0.06]"
-          style={{ left: "5%", top: "10%", width: 600, height: 600, background: "#aaff00" }}
-        />
-        {/* Subtle blue-purple bottom right */}
-        <div
-          className="bg-orb absolute rounded-full blur-[120px] opacity-[0.04]"
-          style={{ right: "5%", bottom: "15%", width: 500, height: 500, background: "#4040cc" }}
-        />
-        {/* Faint center glow */}
-        <div
-          className="bg-orb absolute rounded-full blur-[160px] opacity-[0.03]"
-          style={{ left: "40%", top: "40%", width: 700, height: 700, background: "#aaff00" }}
-        />
+        {/* Orbs layer */}
+        <div className="mouse-parallax-orbs absolute inset-0">
+          {/* Very subtle volt glow top-left */}
+          <div
+            className="bg-orb absolute rounded-full blur-[120px] opacity-[0.06]"
+            style={{ left: "5%", top: "10%", width: 600, height: 600, background: "#aaff00" }}
+          />
+          {/* Subtle blue-purple bottom right */}
+          <div
+            className="bg-orb absolute rounded-full blur-[120px] opacity-[0.04]"
+            style={{ right: "5%", bottom: "15%", width: 500, height: 500, background: "#4040cc" }}
+          />
+          {/* Faint center glow */}
+          <div
+            className="bg-orb absolute rounded-full blur-[160px] opacity-[0.03]"
+            style={{ left: "40%", top: "40%", width: 700, height: 700, background: "#aaff00" }}
+          />
+        </div>
       </div>
     </div>
   );
