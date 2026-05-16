@@ -53,7 +53,7 @@ export default function Navbar() {
     <>
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
-        animate={isReady ? { y: 0, opacity: 1 } : { y: -60, opacity: 0 }}
+        animate={isReady ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 w-full z-50 border-b transition-all duration-300 ${scrolled
           ? "border-white/7 bg-[#0a0a0f]/90 backdrop-blur-md"
