@@ -11,12 +11,30 @@ export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setLoading(false);
-    setSubmitted(true);
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        console.error("Form submission failed:", data);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -118,6 +136,7 @@ export default function ContactSection() {
                     </label>
                     <input
                       id={id}
+                      name={key}
                       type={type}
                       required
                       value={form[key as keyof typeof form]}
@@ -133,6 +152,7 @@ export default function ContactSection() {
                   </label>
                   <textarea
                     id="contact-message"
+                    name="message"
                     required
                     rows={5}
                     value={form.message}
