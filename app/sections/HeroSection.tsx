@@ -18,7 +18,7 @@ const titleAnimation = (delayOffset: number): Variants => ({
 });
 
 const textRevealAnimation: Variants = {
-  initial: { y: "150%" },
+  initial: { y: "1050%" },
   animate: {
     y: 0,
     transition: {
@@ -179,7 +179,7 @@ export default function HeroSection() {
           <h1 className="hero-h1 text-[clamp(4rem,12vw,10rem)] font-medium text-surgical-white tracking-tighter leading-[0.85]">
             <AnimatedWord text="AKASH" delayOffset={delayOffset} isReady={isReady} />
             <br />
-            <AnimatedWord text="GEETHANJANA" className="text-volt" delayOffset={delayOffset} isReady={isReady} />
+            <AnimatedWord text="GEETHANJANA" className="text-volt max-sm:text-[3rem] max-md:text-[5rem]" delayOffset={delayOffset} isReady={isReady} />
           </h1>
 
           {/* Role typewriter + divider */}

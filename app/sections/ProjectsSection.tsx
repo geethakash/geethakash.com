@@ -115,14 +115,14 @@ export default function ProjectsSection() {
               Core Projects
             </h2>
           </motion.div>
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="font-mono text-xs text-foreground/50 uppercase hidden sm:block"
           >
-            {projects.length} Projects — scroll →
-          </motion.div>
+            {projects.length}  Projects →
+          </motion.div> */}
         </div>
 
         {/* Horizontal scroll track */}

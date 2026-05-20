@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export default function AnimatedBackground() {
+export default function AnimatedBackgroundDesktop() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [stars, setStars] = useState<{ id: number; top: string; left: string; size: number }[]>([]);
 
@@ -57,7 +57,7 @@ export default function AnimatedBackground() {
       const handleMouseMove = (e: MouseEvent) => {
         const x = (e.clientX / window.innerWidth - 0.5);
         const y = (e.clientY / window.innerHeight - 0.5);
-        
+
         starsXTo(x * -50);
         starsYTo(y * -50);
         orbsXTo(x * -20);
@@ -120,6 +120,7 @@ export default function AnimatedBackground() {
 
       if (typeof window !== "undefined") {
         window.addEventListener("mousemove", handleMouseMove);
+
         if ((window as any).__PRELOADER_DONE__) {
           playStars();
         } else {

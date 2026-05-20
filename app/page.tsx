@@ -1,4 +1,7 @@
-import AnimatedBackground from "./components/AnimatedBackground";
+'use client';
+
+import AnimatedBackgroundDesktop from "./components/AnimatedBackgroundDesktop";
+import AnimatedBackgroundMobile from "./components/AnimatedBackgroundMobile";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HeroSection from "./sections/HeroSection";
@@ -8,12 +11,16 @@ import ExperienceSection from "./sections/ExperienceSection";
 import ProjectsSection from "./sections/ProjectsSection";
 import SkillsSection from "./sections/SkillsSection";
 import ContactSection from "./sections/ContactSection";
+import useIsMobile from "./hooks/isMobile";
 
 export default function Home() {
+  const isMobile = useIsMobile()
+
   return (
     <main className="relative min-h-screen">
       {/* Fixed animated background */}
-      <AnimatedBackground />
+      {isMobile ? <AnimatedBackgroundMobile /> : <AnimatedBackgroundDesktop />}
+
 
       {/* Navigation */}
       <Navbar />
