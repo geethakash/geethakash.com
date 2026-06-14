@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const highlights = [
-  { label: "EDUCATION", value: "BSc (Hons.) in Information and Communication Technology (UG)", sub: "University of Kelaniya, Sri Lanka" },
+  { label: "EDUCATION", value: "Bachelor (Hons.) in Information and Communication Technology (UG)", sub: "University of Kelaniya, Sri Lanka" },
   { label: "LOCATION", value: "Sri Lanka 🇱🇰", sub: "Open to remote globally" },
   { label: "STARTED", value: "2019", sub: "6+ years building software" },
 ];
