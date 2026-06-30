@@ -29,7 +29,7 @@ const journeyEvents = [
     tech: ["React", "Next.js", "GSAP", "Framer Motion", "Tailwind"],
   },
   {
-    year: "2022",
+    year: "2025",
     title: "Premise Edge — BMS System",
     desc: "University project: a centralized Building Energy Optimization & Automation System with IoT-based architecture and real-time MQTT monitoring.",
     tech: ["MQTT", "IoT", "ESP32", "FastAPI", "WebSockets", "Next.js"],
