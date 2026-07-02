@@ -34,16 +34,21 @@ export const metadata: Metadata = {
     description: "Building scalable web apps, smooth UX, and smart IoT systems.",
     type: "website",
     url: "https://geethakash.com",
+    images: "http://geethakash.com/assets/img/og-img.jpg"
   },
   twitter: {
     card: "summary_large_image",
     title: "Akash Geethanjana",
     description: "Building scalable web apps, smooth UX, and smart IoT systems.",
+    images: "http://geethakash.com/assets/img/og-img.jpg"
   },
   robots: {
     index: true,
     follow: true,
   },
+  verification: {
+    google: "G-8E4C4J5SL7"
+  }
 };
 
 import SmoothScroll from "./components/SmoothScroll";
