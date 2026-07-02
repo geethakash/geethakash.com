@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,7 +48,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   verification: {
-    google: "G-8E4C4J5SL7"
+    google: "G-8E4C4J5SL7",
+
   }
 };
 
@@ -64,6 +66,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
+      <GoogleAnalytics gaId="G-8E4C4J5SL7" />
       <body className="bg-[#050510] text-[#f1f5f9] overflow-x-hidden antialiased">
         <Preloader />
         <SmoothScroll>
