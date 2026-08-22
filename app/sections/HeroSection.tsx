@@ -202,15 +202,66 @@ export default function HeroSection() {
         <div className="hero-cta mt-12 flex flex-wrap gap-4">
           <a
             href="#projects"
-            className="px-7 py-3 bg-volt text-obsidian font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#c8ff4d] transition-colors"
+            className="group relative inline-flex items-center justify-center px-7 py-3.5 bg-volt text-obsidian font-mono text-xs font-bold uppercase tracking-widest transition-colors duration-300 overflow-hidden"
           >
-            View Projects
+            {/* Drawing Border SVG Overlay */}
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="0"
+                y="0"
+                width="100%"
+                height="100%"
+                fill="none"
+                stroke="#0a0a0f"
+                strokeWidth="2"
+                pathLength="100"
+                className="[stroke-dasharray:100] [stroke-dashoffset:100] group-hover:[stroke-dashoffset:0] transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              />
+            </svg>
+            {/* Split Flap Roll */}
+            <div className="relative flex flex-col items-center justify-center h-4 overflow-hidden">
+              <span className="text-obsidian transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
+                View Projects
+              </span>
+              <span className="absolute text-obsidian font-extrabold transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full group-hover:translate-y-0">
+                View Projects
+              </span>
+            </div>
           </a>
+
           <Link
             href="/business-card"
-            className="px-7 py-3 border border-white/15 text-surgical-white font-mono text-xs font-bold uppercase tracking-widest hover:border-[#aaff00]/40 hover:text-volt transition-colors"
+            className="group relative inline-flex items-center justify-center px-7 py-3.5 bg-[#111116] border border-white/15 font-mono text-xs font-bold uppercase tracking-widest transition-colors duration-300 overflow-hidden"
           >
-            Business Card
+            {/* Drawing Border SVG Overlay */}
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="0"
+                y="0"
+                width="100%"
+                height="100%"
+                fill="none"
+                stroke="#aaff00"
+                strokeWidth="1.5"
+                pathLength="100"
+                className="[stroke-dasharray:100] [stroke-dashoffset:100] group-hover:[stroke-dashoffset:0] transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              />
+            </svg>
+            {/* Split Flap Roll */}
+            <div className="relative flex flex-col items-center justify-center h-4 overflow-hidden">
+              <span className="text-surgical-white transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
+                Business Card
+              </span>
+              <span className="absolute text-volt transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full group-hover:translate-y-0">
+                Business Card
+              </span>
+            </div>
           </Link>
         </div>
 

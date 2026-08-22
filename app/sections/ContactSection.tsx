@@ -134,41 +134,94 @@ export default function ContactSection() {
                     <label htmlFor={id} className="block font-mono text-[10px] text-foreground/60 uppercase tracking-widest mb-2">
                       {label}
                     </label>
-                    <input
-                      id={id}
-                      name={key}
-                      type={type}
-                      required
-                      value={form[key as keyof typeof form]}
-                      onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-                      placeholder={placeholder}
-                      className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-sm font-mono focus:outline-none focus:border-[#aaff00]/30 transition-colors"
-                    />
+                    <div className="group relative w-full">
+                      <input
+                        id={id}
+                        name={key}
+                        type={type}
+                        required
+                        value={form[key as keyof typeof form]}
+                        onChange={(e) => setForm({ ...form, [key]: e.target.value })}
+                        placeholder={placeholder}
+                        className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-sm font-mono focus:outline-none transition-colors"
+                      />
+                      {/* Drawing Border SVG on Focus */}
+                      <svg
+                        className="absolute inset-0 w-full h-full pointer-events-none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="0"
+                          y="0"
+                          width="100%"
+                          height="100%"
+                          fill="none"
+                          stroke="#aaff00"
+                          strokeWidth="1.5"
+                          pathLength="100"
+                          className="[stroke-dasharray:100] [stroke-dashoffset:100] group-focus-within:[stroke-dashoffset:0] transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 ))}
                 <div>
                   <label htmlFor="contact-message" className="block font-mono text-[10px] text-foreground/60 uppercase tracking-widest mb-2">
                     MESSAGE
                   </label>
-                  <textarea
-                    id="contact-message"
-                    name="message"
-                    required
-                    rows={5}
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Tell me about your project or just say hi..."
-                    className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-sm font-mono focus:outline-none focus:border-[#aaff00]/30 transition-colors resize-none"
-                  />
+                  <div className="group relative w-full">
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      required
+                      rows={5}
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      placeholder="Tell me about your project or just say hi..."
+                      className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-sm font-mono focus:outline-none transition-colors resize-none block"
+                    />
+                    {/* Drawing Border SVG on Focus */}
+                    <svg
+                      className="absolute inset-0 w-full h-full pointer-events-none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        x="0"
+                        y="0"
+                        width="100%"
+                        height="100%"
+                        fill="none"
+                        stroke="#aaff00"
+                        strokeWidth="1.5"
+                        pathLength="100"
+                        className="[stroke-dasharray:100] [stroke-dashoffset:100] group-focus-within:[stroke-dashoffset:0] transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                      />
+                    </svg>
+                  </div>
                 </div>
-                <motion.button
+                <button
                   id="contact-submit-btn"
                   type="submit"
                   disabled={loading}
-                  className="flex items-center gap-2 px-7 py-3 bg-volt text-obsidian font-mono text-xs font-bold uppercase tracking-widest hover:bg-[#c8ff4d] transition-colors disabled:opacity-60"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
+                  className="group relative flex items-center gap-2 px-7 py-3.5 bg-volt text-obsidian font-mono text-xs font-bold uppercase tracking-widest transition-colors duration-300 disabled:opacity-60 overflow-hidden cursor-pointer"
                 >
+                  {/* Drawing Border SVG Overlay */}
+                  <svg
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      x="0"
+                      y="0"
+                      width="100%"
+                      height="100%"
+                      fill="none"
+                      stroke="#0a0a0f"
+                      strokeWidth="2"
+                      pathLength="100"
+                      className="[stroke-dasharray:100] [stroke-dashoffset:100] group-hover:[stroke-dashoffset:0] transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    />
+                  </svg>
                   {loading ? (
                     <>
                       <motion.span
@@ -176,15 +229,34 @@ export default function ContactSection() {
                         animate={{ rotate: 360 }}
                         transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
                       />
-                      Sending...
+                      <span>Sending...</span>
                     </>
                   ) : (
                     <>
-                      <Send size={13} />
-                      Send Message
+                      {/* Arrow Dispatch Send Icon Container */}
+                      <div className="relative w-3.5 h-3.5 overflow-hidden flex items-center justify-center">
+                        <Send
+                          size={13}
+                          className="transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-3.5 group-hover:-translate-y-3.5"
+                        />
+                        <Send
+                          size={13}
+                          className="absolute transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] -translate-x-3.5 translate-y-3.5 group-hover:translate-x-0 group-hover:translate-y-0"
+                        />
+                      </div>
+
+                      {/* Split Flap Roll */}
+                      <div className="relative flex flex-col items-center justify-center h-4 overflow-hidden">
+                        <span className="text-obsidian transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
+                          Send Message
+                        </span>
+                        <span className="absolute text-obsidian font-extrabold transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full group-hover:translate-y-0">
+                          Send Message
+                        </span>
+                      </div>
                     </>
                   )}
-                </motion.button>
+                </button>
               </form>
             )}
           </motion.div>

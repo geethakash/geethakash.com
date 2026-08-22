@@ -70,42 +70,54 @@ export default function BusinessCardPage() {
           <BusinessCard />
         </motion.div>
 
-        {/* Quick Contact Links */}
+        {/* Quick Contact Links with Split Flap Roll & Drawing Border */}
         <motion.div
           variants={itemVariants}
           className="w-full flex flex-wrap items-center justify-center gap-3 font-mono text-xs"
         >
-          <motion.a
-            href="mailto:hello@geethakash.com"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 px-5 py-3 bg-[#111116] border border-white/10 text-surgical-white hover:border-[#aaff00]/40 hover:text-volt transition-colors uppercase tracking-wider"
-          >
-            <Mail size={13} />
-            Email
-          </motion.a>
-          <motion.a
-            href="https://github.com/Geethakash"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 px-5 py-3 bg-[#111116] border border-white/10 text-surgical-white hover:border-[#aaff00]/40 hover:text-volt transition-colors uppercase tracking-wider"
-          >
-            <ExternalLink size={13} />
-            GitHub
-          </motion.a>
-          <motion.a
-            href="https://linkedin.com/in/geethakash"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 px-5 py-3 bg-[#111116] border border-white/10 text-surgical-white hover:border-[#aaff00]/40 hover:text-volt transition-colors uppercase tracking-wider"
-          >
-            <ExternalLink size={13} />
-            LinkedIn
-          </motion.a>
+          {[
+            { href: "mailto:hello@geethakash.com", label: "Email", icon: Mail, external: false },
+            { href: "https://github.com/Geethakash", label: "GitHub", icon: ExternalLink, external: true },
+            { href: "https://linkedin.com/in/geethakash", label: "LinkedIn", icon: ExternalLink, external: true },
+          ].map(({ href, label, icon: Icon, external }) => (
+            <a
+              key={label}
+              href={href}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noopener noreferrer" : undefined}
+              className="group relative flex items-center px-6 py-3.5 bg-[#111116] border border-white/10 font-mono text-xs font-bold uppercase tracking-wider overflow-hidden transition-colors duration-300"
+            >
+              {/* Drawing Border SVG Overlay */}
+              <svg
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="0"
+                  y="0"
+                  width="100%"
+                  height="100%"
+                  fill="none"
+                  stroke="#aaff00"
+                  strokeWidth="1.5"
+                  pathLength="100"
+                  className="[stroke-dasharray:100] [stroke-dashoffset:100] group-hover:[stroke-dashoffset:0] transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                />
+              </svg>
+
+              {/* Split Flap Roll Container */}
+              <div className="relative flex flex-col items-center justify-center h-4 overflow-hidden">
+                <span className="text-surgical-white transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full flex items-center gap-2">
+                  <Icon size={13} />
+                  <span>{label}</span>
+                </span>
+                <span className="absolute text-volt transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full group-hover:translate-y-0 flex items-center gap-2">
+                  <Icon size={13} />
+                  <span>{label}</span>
+                </span>
+              </div>
+            </a>
+          ))}
         </motion.div>
       </motion.div>
     </main>
