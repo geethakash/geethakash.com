@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -205,12 +206,12 @@ export default function HeroSection() {
           >
             View Projects
           </a>
-          <a
-            href="#contact"
+          <Link
+            href="/business-card"
             className="px-7 py-3 border border-white/15 text-surgical-white font-mono text-xs font-bold uppercase tracking-widest hover:border-[#aaff00]/40 hover:text-volt transition-colors"
           >
-            Contact Me
-          </a>
+            Business Card
+          </Link>
         </div>
 
         {/* Scroll indicator */}
