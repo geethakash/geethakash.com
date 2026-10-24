@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 
 const facts = [
   {
@@ -11,6 +10,109 @@ const facts = [
     sub: "Faculty of Computing and Technology",
   },
 ];
+
+type Token = { text: string; className?: string };
+
+const keyword = "text-volt";
+const name = "text-surgical-white";
+const prop = "text-foreground";
+const str = "text-surgical-white";
+const num = "text-volt";
+const punct = "text-foreground/55";
+
+const code: Token[][] = [
+  [{ text: "const", className: keyword }, { text: " " }, { text: "akash", className: name }, { text: " = {", className: punct }],
+  [{ text: "  basedIn", className: prop }, { text: ": ", className: punct }, { text: '"Sri Lanka"', className: str }, { text: ",", className: punct }],
+  [{ text: "  codingSince", className: prop }, { text: ": ", className: punct }, { text: "2019", className: num }, { text: ",", className: punct }],
+  [{ text: "  careerShift", className: prop }, { text: ": ", className: punct }, { text: '"TecLMS"', className: str }, { text: ",", className: punct }],
+  [
+    { text: "  stack", className: prop },
+    { text: ": [", className: punct },
+    { text: '"Next.js"', className: str },
+    { text: ", ", className: punct },
+    { text: '"React"', className: str },
+    { text: ",", className: punct },
+  ],
+  [
+    { text: "          " },
+    { text: '"Django"', className: str },
+    { text: ", ", className: punct },
+    { text: '"FastAPI"', className: str },
+    { text: "],", className: punct },
+  ],
+  [{ text: "  loves", className: prop }, { text: ": ", className: punct }, { text: '"hardware + software"', className: str }, { text: ",", className: punct }],
+  [{ text: "};", className: punct }],
+];
+
+const lineLengths = code.map((line) => line.reduce((n, token) => n + token.text.length, 0));
+// Each line also counts one step for its line break, which reads as a short pause.
+const lineStarts = lineLengths.map((_, i) => lineLengths.slice(0, i).reduce((n, len) => n + len + 1, 0));
+const totalChars = lineLengths.reduce((n, len) => n + len + 1, 0);
+const tokenStarts = code.map((line) =>
+  line.map((_, j) => line.slice(0, j).reduce((n, token) => n + token.text.length, 0))
+);
+
+const clamp = (value: number, max: number) => Math.min(Math.max(value, 0), max);
+
+/** Editor window that types out a short description of me once it scrolls into view. */
+function CodeCard({ start }: { start: boolean }) {
+  const reduceMotion = useReducedMotion();
+  const [typed, setTyped] = useState(0);
+
+  useEffect(() => {
+    if (!start || reduceMotion) return;
+    let count = 0;
+    const timer = setInterval(() => {
+      count += 1;
+      setTyped(count);
+      if (count >= totalChars) clearInterval(timer);
+    }, 22);
+    return () => clearInterval(timer);
+  }, [start, reduceMotion]);
+
+  const shown = reduceMotion ? totalChars : typed;
+
+  return (
+    <div aria-hidden="true" className="border border-white/7 bg-[#0a0a0f]">
+      <div className="flex items-center gap-2 border-b border-white/7 bg-[#18181f] px-4 py-3">
+        <span className="size-2.5 rounded-full bg-volt/80" />
+        <span className="size-2.5 rounded-full bg-white/20" />
+        <span className="size-2.5 rounded-full bg-white/10" />
+        <span className="ml-3 font-mono text-xs text-foreground/60">akash.ts</span>
+        <span className="ml-auto font-mono text-[10px] text-foreground/40 uppercase tracking-widest">
+          TypeScript
+        </span>
+      </div>
+
+      <div className="overflow-x-auto p-5 sm:p-6 font-mono text-[13px] sm:text-sm md:text-[15px] lg:text-base leading-7 lg:leading-8">
+        {code.map((line, i) => {
+          const start = lineStarts[i];
+          // Untyped text stays in place but invisible, so the card never changes size.
+          const lineTyped = clamp(shown - start, lineLengths[i]);
+          const visible = line.map((token, j) => clamp(lineTyped - tokenStarts[i][j], token.text.length));
+          const hasCursor =
+            (shown >= start && shown <= start + lineLengths[i]) || (i === code.length - 1 && shown >= totalChars);
+          const cursorToken = hasCursor ? visible.findIndex((v, j) => tokenStarts[i][j] + v === lineTyped) : -1;
+
+          return (
+            <div key={i} className="flex">
+              <span className="mr-4 w-6 shrink-0 select-none text-right text-foreground/25">{i + 1}</span>
+              <span className="whitespace-pre">
+                {line.map((token, j) => (
+                  <span key={j} className={token.className}>
+                    {token.text.slice(0, visible[j])}
+                    {j === cursorToken && <span className="cursor-blink -mr-[5px]" />}
+                    <span className="opacity-0">{token.text.slice(visible[j])}</span>
+                  </span>
+                ))}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 function CornerBrackets() {
   const corner = "absolute size-4 border-volt";
@@ -32,28 +134,18 @@ export default function AboutSection() {
     <section id="about" ref={ref} className="py-24 bg-[#111116] section-border">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-[5fr_7fr] gap-14 lg:gap-20 items-start">
-          {/* Left: portrait */}
-          <motion.figure
+          {/* Left: code card */}
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="flex flex-col gap-4"
+            className="lg:sticky lg:top-24"
           >
             <div className="relative mx-2 mt-2">
-              <Image
-                src="/assets/img/profile-image.jpg"
-                alt="Portrait of Akash Geethanjana"
-                width={1984}
-                height={1984}
-                sizes="(min-width: 1280px) 30rem, (min-width: 1024px) 40vw, 100vw"
-                className="aspect-square w-full object-cover border border-white/7"
-              />
+              <CodeCard start={inView} />
               <CornerBrackets />
             </div>
-            <figcaption className="mx-2 mt-2 font-mono text-[10px] text-foreground/50 uppercase tracking-widest">
-              Akash Geethanjana · Sri Lanka
-            </figcaption>
-          </motion.figure>
+          </motion.div>
 
           {/* Right: story */}
           <motion.div
