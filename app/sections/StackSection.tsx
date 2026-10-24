@@ -29,14 +29,14 @@ export default function StackSection() {
           className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
           <div>
-            <span className="font-mono text-xs text-volt uppercase tracking-[0.2em]">
+            <span className="font-mono text-xs md:text-sm text-volt uppercase tracking-[0.2em]">
               Tech_Stack
             </span>
-            <h2 className="text-4xl text-surgical-white font-medium tracking-tight mt-2">
+            <h2 className="text-4xl md:text-5xl text-surgical-white font-medium tracking-tight mt-2">
               The Toolbox
             </h2>
           </div>
-          <p className="max-w-sm text-sm text-foreground leading-relaxed md:text-right">
+          <p className="max-w-md text-sm md:text-base text-foreground leading-relaxed md:text-right">
             Optimised for performance, scalability, and developer experience.
             Every tool chosen with purpose.
           </p>
@@ -50,14 +50,14 @@ export default function StackSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.05 }}
-              className="group grid gap-2 border-b border-white/7 py-5 sm:grid-cols-[14rem_minmax(0,1fr)] sm:gap-6 hover:bg-white/[0.015] transition-colors duration-300"
+              className="group grid gap-2 border-b border-white/7 py-6 sm:grid-cols-[16rem_minmax(0,1fr)] sm:gap-6 hover:bg-white/[0.015] transition-colors duration-300"
             >
-              <dt className="flex items-center gap-3 font-mono text-[11px] text-foreground/60 uppercase tracking-widest group-hover:text-volt transition-colors duration-300">
+              <dt className="flex items-center gap-3 font-mono text-sm text-foreground/60 uppercase tracking-widest group-hover:text-volt transition-colors duration-300">
                 <span className="w-1 h-1 bg-volt/40 group-hover:bg-volt transition-colors duration-300" />
                 {row.label}
               </dt>
               <dd>
-                <ul className="flex flex-wrap gap-x-5 gap-y-1 text-sm font-mono text-surgical-white/80">
+                <ul className="flex flex-wrap gap-x-6 gap-y-2 text-base md:text-lg font-mono text-surgical-white/80">
                   {row.items.map((item) => (
                     <li key={item} className="tech-item cursor-default">
                       {item}

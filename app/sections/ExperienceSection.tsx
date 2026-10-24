@@ -50,10 +50,10 @@ export default function ExperienceSection() {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <span className="font-mono text-xs text-volt uppercase tracking-[0.2em]">
+          <span className="font-mono text-xs md:text-sm text-volt uppercase tracking-[0.2em]">
             Work History
           </span>
-          <h2 className="text-4xl text-surgical-white font-medium tracking-tight mt-2">
+          <h2 className="text-4xl md:text-5xl text-surgical-white font-medium tracking-tight mt-2">
             Experience
           </h2>
         </motion.div>
@@ -66,32 +66,32 @@ export default function ExperienceSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="group py-12 grid gap-6 md:grid-cols-[12rem_minmax(0,1fr)] md:gap-10"
+              className="group py-12 grid gap-6 md:grid-cols-[14rem_minmax(0,1fr)] md:gap-10"
             >
               {/* Left: period */}
               <div className="flex flex-row flex-wrap items-baseline gap-x-3 gap-y-2 md:flex-col">
-                <span className="font-mono text-xs text-volt uppercase tracking-widest">
+                <span className="font-mono text-sm text-volt uppercase tracking-widest">
                   {exp.period}
                 </span>
-                <span className="font-mono text-[10px] text-foreground/50 uppercase tracking-widest">
+                <span className="font-mono text-xs text-foreground/50 uppercase tracking-widest">
                   [{exp.type}]
                 </span>
               </div>
 
               {/* Right: role */}
               <div className="min-w-0">
-                <h3 className="text-2xl md:text-[1.75rem] font-medium text-surgical-white tracking-tight leading-tight group-hover:text-volt transition-colors duration-300">
+                <h3 className="text-2xl md:text-3xl font-medium text-surgical-white tracking-tight leading-tight group-hover:text-volt transition-colors duration-300">
                   {exp.company}
                 </h3>
-                <p className="mt-1 font-mono text-xs text-foreground">{exp.role}</p>
-                <p className="mt-5 max-w-[64ch] text-sm text-foreground leading-relaxed">
+                <p className="mt-2 font-mono text-sm text-foreground">{exp.role}</p>
+                <p className="mt-5 max-w-[68ch] text-base text-foreground leading-relaxed">
                   {exp.description}
                 </p>
 
-                <ul className="mt-6 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+                <ul className="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
                   {exp.highlights.map((h) => (
-                    <li key={h} className="flex items-start gap-3 text-sm text-foreground">
-                      <span className="mt-1.5 flex-shrink-0 w-1 h-1 bg-volt" />
+                    <li key={h} className="flex items-start gap-3 text-base text-foreground">
+                      <span className="mt-2.5 flex-shrink-0 w-1 h-1 bg-volt" />
                       {h}
                     </li>
                   ))}
@@ -101,7 +101,7 @@ export default function ExperienceSection() {
                   {exp.tech.map((t) => (
                     <span
                       key={t}
-                      className="text-[10px] bg-[#0a0a0f] text-surgical-white/60 px-2 py-0.5 font-mono uppercase border border-white/7"
+                      className="text-[11px] bg-[#0a0a0f] text-surgical-white/60 px-2.5 py-1 font-mono uppercase border border-white/7"
                     >
                       {t}
                     </span>

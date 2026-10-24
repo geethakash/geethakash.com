@@ -189,14 +189,14 @@ export default function WorkSection() {
           className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
           <div>
-            <span className="font-mono text-xs text-volt uppercase tracking-[0.2em]">
+            <span className="font-mono text-xs md:text-sm text-volt uppercase tracking-[0.2em]">
               Deployments
             </span>
-            <h2 className="text-4xl text-surgical-white font-medium tracking-tight mt-2">
+            <h2 className="text-4xl md:text-5xl text-surgical-white font-medium tracking-tight mt-2">
               Selected Work
             </h2>
           </div>
-          <p className="max-w-sm text-sm text-foreground leading-relaxed md:text-right">
+          <p className="max-w-md text-sm md:text-base text-foreground leading-relaxed md:text-right">
             Products I&apos;ve designed and built, from IoT systems to business software.
           </p>
         </motion.div>
@@ -212,7 +212,7 @@ export default function WorkSection() {
               <span>{leadProject.kind}</span>
               <span>{leadProject.year}</span>
             </div>
-            <h3 className="project-title mt-4 text-4xl md:text-5xl text-surgical-white font-medium tracking-tight transition-colors duration-300">
+            <h3 className="project-title mt-4 text-4xl md:text-[2.75rem] text-surgical-white font-medium tracking-tight transition-colors duration-300">
               {leadProject.name}
             </h3>
             <p className="mt-4 max-w-[62ch] text-sm md:text-base text-foreground leading-relaxed">
@@ -281,9 +281,9 @@ export default function WorkSection() {
               {moreProjects.map((project) => (
                 <li
                   key={project.name}
-                  className="group grid gap-x-6 gap-y-2 border-b border-white/7 py-6 md:grid-cols-[3.5rem_11rem_minmax(0,1fr)_8rem] md:items-baseline hover:bg-white/[0.015] transition-colors duration-300"
+                  className="group grid gap-x-6 gap-y-2 border-b border-white/7 px-4 md:px-6 py-6 md:grid-cols-[4rem_11rem_minmax(0,1fr)_8rem] md:items-baseline hover:bg-white/[0.015] transition-colors duration-300"
                 >
-                  <span className="font-mono text-[10px] text-volt uppercase tracking-widest">
+                  <span className="font-mono text-xs text-volt uppercase tracking-widest">
                     {project.year}
                   </span>
                   <h4 className="text-lg text-surgical-white font-medium leading-tight group-hover:text-volt transition-colors duration-300">

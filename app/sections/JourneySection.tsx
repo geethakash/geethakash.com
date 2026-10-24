@@ -151,10 +151,10 @@ export default function JourneySection() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <span className="font-mono text-xs text-volt uppercase tracking-[0.2em]">
+          <span className="font-mono text-xs md:text-sm text-volt uppercase tracking-[0.2em]">
             Timeline
           </span>
-          <h2 className="text-4xl text-surgical-white font-medium tracking-tight mt-2">
+          <h2 className="text-4xl md:text-5xl text-surgical-white font-medium tracking-tight mt-2">
             The Journey
           </h2>
         </motion.div>

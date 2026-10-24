@@ -62,10 +62,10 @@ export default function AboutSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <span className="font-mono text-xs text-volt uppercase tracking-[0.2em] mb-4 block">
+            <span className="font-mono text-xs md:text-sm text-volt uppercase tracking-[0.2em] mb-4 block">
               About
             </span>
-            <h2 className="text-4xl text-surgical-white font-medium tracking-tight mb-8">
+            <h2 className="text-4xl md:text-5xl text-surgical-white font-medium tracking-tight mb-8">
               Engineering<br />with purpose.
             </h2>
 
