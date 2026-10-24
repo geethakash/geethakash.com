@@ -10,7 +10,6 @@ const facts = [
     value: "BICT (Hons), University of Kelaniya",
     sub: "Faculty of Computing and Technology",
   },
-  { label: "BASED IN", value: "Sri Lanka 🇱🇰", sub: "Building software since 2019" },
 ];
 
 function CornerBrackets() {
@@ -88,7 +87,7 @@ export default function AboutSection() {
               project, came out of that.
             </p>
 
-            <dl className="grid sm:grid-cols-2 gap-px border border-white/7 bg-white/7">
+            <dl className="grid gap-px border border-white/7 bg-white/7">
               {facts.map(({ label, value, sub }) => (
                 <div
                   key={label}

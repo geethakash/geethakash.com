@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { personJsonLd, site } from "./lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,41 +17,52 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Akash Geethanjana",
-  description:
-    "Portfolio of Akash Geethanjana — a passionate Full-Stack Developer specializing in Next.js, React, GSAP, Framer Motion, and IoT systems.",
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.name} — ${site.role}`,
+    template: `%s — ${site.name}`,
+  },
+  description: site.description,
+  applicationName: site.name,
   keywords: [
     "Akash Geethanjana",
+    "geethakash",
     "Software Engineer",
     "Full-Stack Developer",
     "Next.js",
     "React",
     "TypeScript",
+    "IoT",
     "Portfolio",
     "Sri Lanka",
   ],
-  authors: [{ name: "Akash Geethanjana" }],
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Akash Geethanjana — Full-Stack Developer",
+    type: "profile",
+    firstName: site.givenName,
+    lastName: site.familyName,
+    username: site.handle,
+    title: `${site.name} — ${site.role}`,
     description: "Engineering scalable web systems, smooth UX, and exploring IoT.",
-    type: "website",
-    url: "https://geethakash.com",
-    images: "https://geethakash.com/assets/img/business-card-og.png"
+    url: "/",
+    siteName: site.name,
+    locale: "en_US",
+    images: [{ url: site.ogImage, width: 1200, height: 630, alt: `${site.name} — ${site.role}` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Akash Geethanjana",
+    title: `${site.name} — ${site.role}`,
     description: "Engineering scalable web systems, smooth UX, and exploring IoT.",
-    images: "https://geethakash.com/assets/img/business-card-og.png"
+    images: [site.ogImage],
   },
   robots: {
     index: true,
     follow: true,
   },
-  verification: {
-    google: "G-8E4C4J5SL7",
-
-  }
 };
 
 import SmoothScroll from "./components/SmoothScroll";
@@ -68,6 +80,12 @@ export default function RootLayout({
     >
       <GoogleAnalytics gaId="G-8E4C4J5SL7" />
       <body className="bg-[#050510] text-[#f1f5f9] overflow-x-hidden antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <Preloader />
         <SmoothScroll>
           {children}
