@@ -115,7 +115,7 @@ function ExternalLink({ href, children }: { href: string; children: React.ReactN
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group/link inline-flex items-center gap-1 font-mono text-xs text-volt uppercase tracking-widest underline-offset-4 hover:underline"
+      className="group/link inline-flex items-center gap-1 font-mono text-sm text-volt uppercase tracking-widest underline-offset-4 hover:underline"
     >
       {children}
       <ArrowUpRight
@@ -133,7 +133,7 @@ function Tags({ items }: { items: string[] }) {
       {items.map((tag) => (
         <span
           key={tag}
-          className="text-[10px] bg-[#18181f] text-surgical-white/60 px-2 py-0.5 font-mono uppercase border border-white/7"
+          className="text-[11px] bg-[#18181f] text-surgical-white/60 px-2.5 py-1 font-mono uppercase border border-white/7"
         >
           {tag}
         </span>
@@ -208,7 +208,7 @@ export default function WorkSection() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="project-card group bg-[#111116] border border-white/7 p-6 sm:p-10"
           >
-            <div className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-[10px] text-foreground/40 uppercase tracking-widest">
+            <div className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-xs text-foreground/40 uppercase tracking-widest">
               <span>{leadProject.kind}</span>
               <span>{leadProject.year}</span>
             </div>
@@ -221,7 +221,7 @@ export default function WorkSection() {
 
             <figure className="mt-10 flex flex-col gap-3">
               <SignalFlow />
-              <figcaption className="font-mono text-[10px] text-foreground/40 uppercase tracking-widest">
+              <figcaption className="font-mono text-xs text-foreground/40 uppercase tracking-widest">
                 Telemetry travels up to the dashboard, commands travel back down.
               </figcaption>
             </figure>
@@ -240,25 +240,25 @@ export default function WorkSection() {
                 transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="project-card group flex flex-col bg-[#111116] border border-white/7 p-6 sm:p-10"
               >
-                <div className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-[10px] text-foreground/40 uppercase tracking-widest">
+                <div className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-xs text-foreground/40 uppercase tracking-widest">
                   <span>{project.kind}</span>
                   <span>{project.year}</span>
                 </div>
                 <h3 className="project-title mt-4 text-3xl md:text-4xl text-surgical-white font-medium tracking-tight transition-colors duration-300">
                   {project.name}
                 </h3>
-                <p className="mt-4 text-sm text-foreground leading-relaxed">{project.description}</p>
+                <p className="mt-4 text-base text-foreground leading-relaxed">{project.description}</p>
 
-                <p className="mt-6 font-mono text-[10px] text-foreground/50 uppercase tracking-widest">
+                <p className="mt-6 font-mono text-xs text-foreground/50 uppercase tracking-widest">
                   {project.itemsLabel}
                 </p>
                 <ul className="mt-3 border-t border-white/7">
                   {project.items.map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-3 border-b border-white/7 py-2.5 text-sm text-foreground"
+                      className="flex items-start gap-3 border-b border-white/7 py-3 text-base text-foreground"
                     >
-                      <span className="mt-1.5 flex-shrink-0 w-1 h-1 bg-volt" />
+                      <span className="mt-2.5 flex-shrink-0 w-1 h-1 bg-volt" />
                       {item}
                     </li>
                   ))}
@@ -274,24 +274,24 @@ export default function WorkSection() {
 
           {/* Index of other work */}
           <motion.div {...reveal} transition={{ duration: 0.6 }} className="mt-12">
-            <h3 className="font-mono text-[10px] text-foreground/60 uppercase tracking-widest">
+            <h3 className="font-mono text-xs text-foreground/60 uppercase tracking-widest">
               More Projects
             </h3>
             <ul className="mt-4 border-t border-white/7">
               {moreProjects.map((project) => (
                 <li
                   key={project.name}
-                  className="group grid gap-x-6 gap-y-2 border-b border-white/7 px-4 md:px-6 py-6 md:grid-cols-[4rem_11rem_minmax(0,1fr)_8rem] md:items-baseline hover:bg-white/[0.015] transition-colors duration-300"
+                  className="group grid gap-x-6 gap-y-2 border-b border-white/7 px-4 md:px-6 py-6 md:grid-cols-[4.5rem_13rem_minmax(0,1fr)_9rem] md:items-baseline hover:bg-white/[0.015] transition-colors duration-300"
                 >
-                  <span className="font-mono text-xs text-volt uppercase tracking-widest">
+                  <span className="font-mono text-sm text-volt uppercase tracking-widest">
                     {project.year}
                   </span>
-                  <h4 className="text-lg text-surgical-white font-medium leading-tight group-hover:text-volt transition-colors duration-300">
+                  <h4 className="text-xl text-surgical-white font-medium leading-tight group-hover:text-volt transition-colors duration-300">
                     {project.name}
                   </h4>
                   <div className="min-w-0">
-                    <p className="text-sm text-foreground leading-relaxed">{project.description}</p>
-                    <p className="mt-2 font-mono text-[10px] text-foreground/40 uppercase tracking-widest">
+                    <p className="text-base text-foreground leading-relaxed">{project.description}</p>
+                    <p className="mt-2 font-mono text-xs text-foreground/40 uppercase tracking-widest">
                       {project.tags.join(" · ")}
                     </p>
                   </div>

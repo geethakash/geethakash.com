@@ -15,7 +15,7 @@ export default function Footer() {
               <br />
               together.
             </h2>
-            <p className="text-sm text-foreground leading-relaxed">
+            <p className="text-base text-foreground leading-relaxed">
               I enjoy combining hardware + software to build smart systems that
               interact with the real world.
             </p>
@@ -28,7 +28,7 @@ export default function Footer() {
               href="https://github.com/Geethakash"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-sm text-foreground hover:text-volt transition-colors uppercase tracking-widest flex items-center gap-2"
+              className="font-mono text-base text-foreground hover:text-volt transition-colors uppercase tracking-widest flex items-center gap-2"
             >
               {/* GitHub SVG placeholder */}
               <span className="inline-block w-4 h-4" aria-hidden="true" />
@@ -40,7 +40,7 @@ export default function Footer() {
               href="https://linkedin.com/in/geethakash"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-sm text-foreground hover:text-volt transition-colors uppercase tracking-widest flex items-center gap-2"
+              className="font-mono text-base text-foreground hover:text-volt transition-colors uppercase tracking-widest flex items-center gap-2"
             >
               {/* LinkedIn SVG placeholder */}
               <span className="inline-block w-4 h-4" aria-hidden="true" />
@@ -49,7 +49,7 @@ export default function Footer() {
 
             <a
               href="mailto:hello@geethakash.com"
-              className="font-mono text-sm text-foreground hover:text-volt transition-colors uppercase tracking-widest flex items-center gap-2"
+              className="font-mono text-base text-foreground hover:text-volt transition-colors uppercase tracking-widest flex items-center gap-2"
             >
               {/* LinkedIn SVG placeholder */}
               <span className="inline-block w-4 h-4" aria-hidden="true" />
@@ -62,7 +62,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/7 pt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
-          <div className="font-mono text-[10px] text-foreground/40 uppercase tracking-widest">
+          <div className="font-mono text-xs text-foreground/40 uppercase tracking-widest">
             © {year} Akash Geethanjana
           </div>
         </div>

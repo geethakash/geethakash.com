@@ -63,9 +63,10 @@ export default function ContactSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="space-y-8"
           >
-            <p className="text-sm text-foreground leading-relaxed max-w-md">
+            <p className="text-base text-foreground leading-relaxed max-w-md">
               Always happy to chat about tech, swap ideas, or hear about
-              something interesting you&apos;re building. Based in Sri Lanka.
+              something interesting you&apos;re building. Based in{" "}
+              <span className="whitespace-nowrap">Sri Lanka</span>.
             </p>
 
             <div className="space-y-4">
@@ -81,13 +82,13 @@ export default function ContactSection() {
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="group flex items-center gap-4 border-b border-white/7 py-4 hover:border-[#aaff00]/20 transition-colors"
                 >
-                  <span className="font-mono text-[10px] text-foreground/50 uppercase tracking-widest w-20 flex-shrink-0">
+                  <span className="font-mono text-xs text-foreground/50 uppercase tracking-widest w-24 flex-shrink-0">
                     {label}
                   </span>
-                  <span className="font-mono text-sm text-foreground group-hover:text-volt transition-colors">
+                  <span className="font-mono text-base text-foreground group-hover:text-volt transition-colors">
                     {value}
                   </span>
-                  <span className="ml-auto text-volt opacity-0 group-hover:opacity-100 transition-opacity font-mono text-xs">→</span>
+                  <span className="ml-auto text-volt opacity-0 group-hover:opacity-100 transition-opacity font-mono text-sm">→</span>
                 </a>
               ))}
             </div>
@@ -108,7 +109,7 @@ export default function ContactSection() {
               >
                 <CheckCircle size={32} className="text-volt" />
                 <h3 className="text-surgical-white font-medium text-xl">Message sent.</h3>
-                <p className="text-sm text-foreground">
+                <p className="text-base text-foreground">
                   Thanks for reaching out. I&apos;ll get back to you soon.
                 </p>
               </motion.div>
@@ -119,7 +120,7 @@ export default function ContactSection() {
                   { id: "contact-email", label: "EMAIL", type: "email", key: "email", placeholder: "john@example.com" },
                 ].map(({ id, label, type, key, placeholder }) => (
                   <div key={id}>
-                    <label htmlFor={id} className="block font-mono text-[10px] text-foreground/60 uppercase tracking-widest mb-2">
+                    <label htmlFor={id} className="block font-mono text-xs text-foreground/60 uppercase tracking-widest mb-2">
                       {label}
                     </label>
                     <div className="group relative w-full">
@@ -131,7 +132,7 @@ export default function ContactSection() {
                         value={form[key as keyof typeof form]}
                         onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                         placeholder={placeholder}
-                        className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-sm font-mono focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-base font-mono focus:outline-none transition-colors"
                       />
                       {/* Drawing Border SVG on Focus */}
                       <svg
@@ -154,7 +155,7 @@ export default function ContactSection() {
                   </div>
                 ))}
                 <div>
-                  <label htmlFor="contact-message" className="block font-mono text-[10px] text-foreground/60 uppercase tracking-widest mb-2">
+                  <label htmlFor="contact-message" className="block font-mono text-xs text-foreground/60 uppercase tracking-widest mb-2">
                     MESSAGE
                   </label>
                   <div className="group relative w-full">
@@ -166,7 +167,7 @@ export default function ContactSection() {
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       placeholder="Say hi, or tell me what you're working on..."
-                      className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-sm font-mono focus:outline-none transition-colors resize-none block"
+                      className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-base font-mono focus:outline-none transition-colors resize-none block"
                     />
                     {/* Drawing Border SVG on Focus */}
                     <svg
