@@ -1,277 +1,120 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import Link from "next/link";
+import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ArrowDown } from "lucide-react";
+import PinoutChip from "../components/PinoutChip";
+import { CopyEmail, LocalTime } from "../components/ui";
+import { features, profile, siteRevision } from "../lib/content";
 
 gsap.registerPlugin(useGSAP);
 
-import { motion, Variants } from "framer-motion";
-
-const titleAnimation = (delayOffset: number): Variants => ({
-  animate: {
-    transition: {
-      delayChildren: delayOffset + 0.1,
-      staggerChildren: 0.05,
-    },
-  },
-});
-
-const textRevealAnimation: Variants = {
-  initial: { y: "1050%" },
-  animate: {
-    y: 0,
-    transition: {
-      ease: [0.6, 0.01, -0.05, 0.95],
-      duration: 0.8,
-    },
-  },
-};
-
-function AnimatedWord({ text, className = "", delayOffset = 0, isReady = true }: { text: string; className?: string; delayOffset?: number; isReady?: boolean }) {
-  return (
-    <motion.span
-      variants={titleAnimation(delayOffset)}
-      initial="initial"
-      animate={isReady ? "animate" : "initial"}
-      className={`inline-block overflow-hidden align-bottom ${className}`}
-    >
-      {[...text].map((letter, index) => (
-        <motion.span
-          className="inline-block will-change-transform"
-          variants={textRevealAnimation}
-          key={index}
-        >
-          {letter === " " ? "\u00A0" : letter}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-}
-
-const roles = [
-  "FULL-STACK DEVELOPER",
-  "SOFTWARE ENGINEER",
-  "IOT ENTHUSIAST",
-  "WEB ANIMATOR",
-];
-
-function TypewriterRole({ texts, isReady = true }: { texts: string[]; isReady?: boolean }) {
-  const spanRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (!isReady) return;
-
-    let index = 0;
-    let phase: "typing" | "pausing" | "erasing" = "typing";
-    let charIndex = 0;
-    let timeout: ReturnType<typeof setTimeout>;
-
-    const loop = () => {
-      const current = texts[index];
-
-      if (phase === "typing") {
-        if (charIndex < current.length) {
-          charIndex++;
-          if (spanRef.current) spanRef.current.textContent = current.slice(0, charIndex);
-          timeout = setTimeout(loop, 60);
-        } else {
-          phase = "pausing";
-          timeout = setTimeout(loop, 2000);
-        }
-      } else if (phase === "pausing") {
-        phase = "erasing";
-        timeout = setTimeout(loop, 300);
-      } else {
-        if (charIndex > 0) {
-          charIndex--;
-          if (spanRef.current) spanRef.current.textContent = current.slice(0, charIndex);
-          timeout = setTimeout(loop, 30);
-        } else {
-          index = (index + 1) % texts.length;
-          phase = "typing";
-          timeout = setTimeout(loop, 60);
-        }
-      }
-    };
-
-    loop();
-
-    return () => clearTimeout(timeout);
-  }, [texts, isReady]);
-
-  return (
-    <span className="text-volt">
-      <span ref={spanRef}></span>
-      <span className="cursor-blink" />
-    </span>
-  );
-}
-
 export default function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [animationKey, setAnimationKey] = useState(0);
-  const [isReplay, setIsReplay] = useState(false);
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      if ((window as any).__PRELOADER_DONE__) {
-        setIsReady(true);
-      } else {
-        const handlePreloader = () => setIsReady(true);
-        window.addEventListener("preloader-finished", handlePreloader);
-        return () => window.removeEventListener("preloader-finished", handlePreloader);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleReplay = () => {
-      setIsReplay(true);
-      setAnimationKey(prev => prev + 1);
-    };
-    window.addEventListener("replay-animations", handleReplay);
-    return () => window.removeEventListener("replay-animations", handleReplay);
-  }, []);
-
-  const delayOffset = isReplay ? 0 : 0.4;
+  const nameRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(
     () => {
-      if (!isReady) {
-        gsap.set([".hero-sub", ".hero-cta", ".hero-meta", ".hero-scroll"], { opacity: 0 });
-        return;
-      }
-      gsap.fromTo(".hero-sub", { opacity: 0, y: 30 }, {
-        opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: delayOffset + 0.35,
+      const mm = gsap.matchMedia();
+      // The name starts condensed (set in CSS) and widens to full width
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.to(".hero-line", {
+          "--wdth": 125,
+          duration: 1.6,
+          ease: "expo.out",
+          stagger: 0.12,
+          delay: 0.1,
+        });
       });
-      gsap.fromTo(".hero-cta", { opacity: 0, y: 20 }, {
-        opacity: 1, y: 0, duration: 0.7, ease: "power2.out", delay: delayOffset + 0.55,
-      });
-      gsap.fromTo(".hero-meta", { opacity: 0 }, {
-        opacity: 1, duration: 0.8, delay: delayOffset + 0.65,
-      });
-      gsap.fromTo(".hero-scroll", { opacity: 0, y: 10 }, {
-        opacity: 1, y: 0, duration: 0.6, delay: delayOffset + 1.0,
-      });
+      return () => mm.revert();
     },
-    { scope: containerRef, dependencies: [animationKey, delayOffset, isReady] }
+    { scope: nameRef },
   );
 
+  const titleBlock = [
+    { label: "Part no.", value: "AG-19" },
+    { label: "Function", value: profile.role },
+    { label: "Revision", value: siteRevision },
+    {
+      label: "Local time",
+      value: (
+        <>
+          <LocalTime /> <span className="text-ink-3">{profile.utcOffset}</span>
+        </>
+      ),
+    },
+  ];
+
   return (
-    <section
-      key={animationKey}
-      id="hero"
-      ref={containerRef}
-      className="relative mx-auto min-h-screen flex flex-col justify-center pt-14"
-    >
-      <div className="max-w-7xl mx-auto w-full px-6 flex flex-col justify-center flex-1 relative">
-        {/* Top-right metadata — template style */}
-        {/* <div className="hero-meta absolute top-20 right-6 font-mono text-[10px] text-foreground/50 space-y-1 hidden md:block text-right">
-          <p>CODE</p>
-          <p>CREATE</p>
-          <p>SOLVE</p>
-        </div> */}
+    <section id="top" aria-label="Introduction" className="relative">
+      <div className="mx-auto max-w-7xl px-4 pb-16 pt-6 sm:px-6 md:pb-24 md:pt-10 lg:px-8">
+        {/* Datasheet title block */}
+        <dl className="grid grid-cols-2 border-y border-rule md:grid-cols-4">
+          {titleBlock.map((cell, i) => (
+            <div
+              key={cell.label}
+              className={`flex flex-col gap-1 py-3 pr-3 ${i % 2 === 1 ? "border-l border-rule pl-3" : ""} ${
+                i >= 2 ? "border-t border-rule md:border-t-0" : ""
+              } ${i === 2 ? "md:border-l md:pl-3" : ""}`}
+            >
+              <dt className="label">{cell.label}</dt>
+              <dd className="font-mono text-sm">{cell.value}</dd>
+            </div>
+          ))}
+        </dl>
 
-        {/* Main heading */}
-        <div className="space-y-6">
-          <h1 className="hero-h1 text-[clamp(4rem,12vw,10rem)] font-medium text-surgical-white tracking-tighter leading-[0.85]">
-            <AnimatedWord text="AKASH" delayOffset={delayOffset} isReady={isReady} />
-            <br />
-            <AnimatedWord text="GEETHANJANA" className="text-volt max-sm:text-[3rem] max-md:text-[5rem]" delayOffset={delayOffset} isReady={isReady} />
-          </h1>
+        <h1
+          ref={nameRef}
+          className="display mt-10 text-[clamp(2.5rem,11.4vw,9.5rem)] md:mt-14"
+        >
+          <span className="hero-line block">Akash</span>
+          <span className="hero-line block">Geethanjana</span>
+        </h1>
 
-          {/* Role typewriter + divider */}
-          <div className="hero-sub flex items-center gap-6">
-            <p className="max-w-md text-sm leading-relaxed text-foreground font-mono">
-              <TypewriterRole texts={roles} isReady={isReady} />
-              <br />
-              <span className="text-foreground mt-1 block">
-                Full-Stack Developer passionate about software engineering,
-                building scalable web applications, crafting smooth user
-                experiences, and experimenting with IoT systems.
-              </span>
+        <div className="mt-12 grid items-start gap-14 lg:mt-16 lg:grid-cols-12 lg:gap-8">
+          <div className="flex flex-col gap-8 lg:col-span-6 lg:pt-4">
+            <p className="max-w-[36ch] text-xl leading-snug text-ink-2 md:text-2xl md:leading-snug">
+              Full-stack engineer. I build fast, carefully animated web apps, and I&apos;m happiest
+              when they <span className="highlight">talk to hardware</span>: edge-AI devices, IoT
+              sensors and building controls.
             </p>
-            <div className="h-px flex-grow bg-white/7 hidden md:block" />
+
+            <p className="flex items-center gap-3 font-mono text-sm">
+              <span className="led" aria-hidden="true" />
+              Open to remote work · Based in {profile.location}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="#work"
+                className="group inline-flex items-center gap-3 bg-signal px-5 py-3 font-mono text-sm font-medium uppercase tracking-[0.06em] text-on-signal transition-colors hover:bg-ink hover:text-paper"
+              >
+                See selected work
+                <ArrowDown size={16} aria-hidden="true" className="transition-transform group-hover:translate-y-0.5" />
+              </a>
+              <CopyEmail />
+            </div>
+          </div>
+
+          <div className="w-full max-w-[34rem] justify-self-center lg:col-span-6 lg:justify-self-end">
+            <PinoutChip />
           </div>
         </div>
 
-        {/* CTA buttons */}
-        <div className="hero-cta mt-12 flex flex-wrap gap-4">
-          <a
-            href="#projects"
-            className="group relative inline-flex items-center justify-center px-7 py-3.5 bg-volt text-obsidian font-mono text-xs font-bold uppercase tracking-widest transition-colors duration-300 overflow-hidden"
-          >
-            {/* Drawing Border SVG Overlay */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              xmlns="http://www.w3.org/2000/svg"
+        {/* Features */}
+        <dl className="mt-16 grid border-t border-rule sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
+          {features.map((f, i) => (
+            <div
+              key={f.label}
+              className={`flex flex-col gap-1 border-b border-rule py-5 sm:pr-6 lg:border-b-0 ${
+                i % 2 === 1 ? "sm:border-l sm:pl-6" : ""
+              } ${i === 2 ? "lg:border-l lg:pl-6" : ""}`}
             >
-              <rect
-                x="0"
-                y="0"
-                width="100%"
-                height="100%"
-                fill="none"
-                stroke="#0a0a0f"
-                strokeWidth="2"
-                pathLength="100"
-                className="[stroke-dasharray:100] [stroke-dashoffset:100] group-hover:[stroke-dashoffset:0] transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-              />
-            </svg>
-            {/* Split Flap Roll */}
-            <div className="relative flex flex-col items-center justify-center h-4 overflow-hidden">
-              <span className="text-obsidian transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
-                View Projects
-              </span>
-              <span className="absolute text-obsidian font-extrabold transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full group-hover:translate-y-0">
-                View Projects
-              </span>
+              <dt className="label">{f.label}</dt>
+              <dd className="text-lg leading-snug">{f.value}</dd>
             </div>
-          </a>
-
-          <Link
-            href="/business-card"
-            className="group relative inline-flex items-center justify-center px-7 py-3.5 bg-[#111116] border border-white/15 font-mono text-xs font-bold uppercase tracking-widest transition-colors duration-300 overflow-hidden"
-          >
-            {/* Drawing Border SVG Overlay */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="0"
-                y="0"
-                width="100%"
-                height="100%"
-                fill="none"
-                stroke="#aaff00"
-                strokeWidth="1.5"
-                pathLength="100"
-                className="[stroke-dasharray:100] [stroke-dashoffset:100] group-hover:[stroke-dashoffset:0] transition-[stroke-dashoffset] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-              />
-            </svg>
-            {/* Split Flap Roll */}
-            <div className="relative flex flex-col items-center justify-center h-4 overflow-hidden">
-              <span className="text-surgical-white transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
-                Business Card
-              </span>
-              <span className="absolute text-volt transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full group-hover:translate-y-0">
-                Business Card
-              </span>
-            </div>
-          </Link>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="hero-scroll absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/40">
-            Scroll
-          </span>
-          <div className="w-px h-8 bg-gradient-to-b from-[#aaff00]/40 to-transparent" />
-        </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

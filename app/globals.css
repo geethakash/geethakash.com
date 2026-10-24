@@ -1,230 +1,290 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/*
+  Layout: an engineering datasheet. Each section has a narrow side-heading column
+  (section number, datasheet term, title) and a wide content column. Hairline rules
+  separate everything; the signal green is reserved for LEDs, highlights and the
+  primary action.
+*/
+
+:root {
+  --paper: #f2f3ee;
+  --panel: #e8eae2;
+  --ink: #12140f;
+  --ink-2: #464a41;
+  --ink-3: #686d61;
+  --rule: #d3d6cb;
+  --rule-strong: #b4b8aa;
+  --signal: #aaff00;
+  --signal-ink: #3b6600;
+  --on-signal: #12140f;
+  --header: rgb(242 243 238 / 0.82);
+  /* Highlighter: a half-height pen stroke on paper */
+  --hl-height: 0.55em;
+  --hl-ink: var(--ink);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0c0e0a;
+    --panel: #141710;
+    --ink: #ecefe6;
+    --ink-2: #a9aea1;
+    --ink-3: #82877b;
+    --rule: #252a21;
+    --rule-strong: #3a4033;
+    --signal: #aaff00;
+    --signal-ink: #b9ff3d;
+    --on-signal: #0c0e0a;
+    --header: rgb(12 14 10 / 0.8);
+    --hl-height: 100%;
+    --hl-ink: var(--on-signal);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #0c0e0a;
+  --panel: #141710;
+  --ink: #ecefe6;
+  --ink-2: #a9aea1;
+  --ink-3: #82877b;
+  --rule: #252a21;
+  --rule-strong: #3a4033;
+  --signal: #aaff00;
+  --signal-ink: #b9ff3d;
+  --on-signal: #0c0e0a;
+  --header: rgb(12 14 10 / 0.8);
+  --hl-height: 100%;
+  --hl-ink: var(--on-signal);
+  color-scheme: dark;
+}
 
 @theme inline {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), "Arial Black", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  /* Template color tokens */
+  --color-paper: var(--paper);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
+  --color-on-signal: var(--on-signal);
+
+  /* Fixed dark palette used by /business-card, which always renders dark */
   --color-obsidian: #0a0a0f;
   --color-steel-900: #111116;
   --color-steel-800: #18181f;
   --color-steel-700: #242430;
-  --color-steel-600: #2e2e3e;
   --color-surgical-white: #f5f5f7;
   --color-volt: #aaff00;
-
   --color-foreground: rgba(245, 245, 247, 0.7);
-  --color-muted: #3a3a52;
-
-  --color-border: rgba(255, 255, 255, 0.07);
 }
-
-:root {
-  color-scheme: dark;
-}
-
-
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 56px;
+    scroll-padding-top: 72px;
   }
 
   body {
-    background: #0a0a0f;
-    color: var(--color-foreground);
+    background: var(--paper);
+    color: var(--ink);
     font-family: var(--font-sans);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--signal-ink);
+    outline-offset: 3px;
+  }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0a0a0f;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #aaff00;
-  border-radius: 2px;
-}
-
-/* Selection */
 ::selection {
-  background: rgba(170, 255, 0, 0.2);
-  color: #f5f5f7;
+  background: var(--signal);
+  color: var(--on-signal);
 }
 
-/* ── Navigation link underline ── */
-.nav-link {
-  position: relative;
-  font-family: var(--font-mono), monospace;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #9291a4;
-  transition: color 0.2s ease;
+@layer components {
+  /* Data packets travelling along a signal-flow connector */
+  .packet {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--signal);
+    box-shadow: 0 0 0 1px var(--ink);
+    animation: packet-x 2.4s linear infinite;
+  }
+
+  .packet.is-return {
+    background: var(--ink);
+    box-shadow: none;
+    animation-direction: reverse;
+  }
+
+  /* Wide display cut of Archivo. --wdth is animated on the hero name. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-variation-settings: "wdth" var(--wdth, 125);
+    letter-spacing: -0.025em;
+    line-height: 0.9;
+  }
+
+  /* Each line resolves its own --wdth so the lines can animate independently */
+  .hero-line {
+    font-variation-settings: "wdth" var(--wdth, 125);
+  }
+
+  /* Small uppercase datasheet labels */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* Highlighter stroke that draws in once on load */
+  .highlight {
+    background-image: linear-gradient(var(--signal), var(--signal));
+    background-repeat: no-repeat;
+    background-position: 0 88%;
+    background-size: 100% var(--hl-height);
+    color: var(--hl-ink);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    animation: highlight-draw 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.6s backwards;
+  }
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: #aaff00;
-  transition: width 0.3s ease;
+@keyframes highlight-draw {
+  from {
+    background-size: 0% var(--hl-height);
+  }
 }
 
-.nav-link:hover {
-  color: #f5f5f7;
+/* Theme toggle icons: show the one that matches the active theme */
+.theme-when-dark {
+  display: none;
 }
 
-.nav-link:hover::after {
-  width: 100%;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-when-dark {
+    display: inline-flex;
+  }
+
+  :root:not([data-theme="light"]) .theme-when-light {
+    display: none;
+  }
 }
 
-.nav-link.active {
-  color: #f5f5f7;
+:root[data-theme="dark"] .theme-when-dark {
+  display: inline-flex;
 }
 
-.nav-link.active::after {
-  width: 100%;
+:root[data-theme="dark"] .theme-when-light {
+  display: none;
 }
 
-/* ── Volt pulse glow ── */
-@keyframes pulse-glow {
-
+/* Status LED */
+@keyframes led-blink {
   0%,
   100% {
-    box-shadow: 0 0 4px rgba(170, 255, 0, 0.4);
+    opacity: 1;
   }
 
   50% {
-    box-shadow: 0 0 14px rgba(170, 255, 0, 0.9);
+    opacity: 0.35;
   }
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
+.led {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--signal);
+  box-shadow: 0 0 0 1px var(--rule-strong);
+  animation: led-blink 2.4s ease-in-out infinite;
 }
 
-/* ── Fade up animations ── */
-@keyframes fade-up {
+@keyframes packet-x {
   from {
-    opacity: 0;
-    transform: translateY(30px);
+    left: 0%;
   }
 
   to {
-    opacity: 1;
-    transform: translateY(0);
+    left: calc(100% - 6px);
   }
 }
 
-.animate-fade-up {
-  animation: fade-up 0.7s ease-out both;
+@keyframes packet-y {
+  from {
+    top: 0%;
+  }
+
+  to {
+    top: calc(100% - 6px);
+  }
 }
 
-.animate-fade-up-delay-1 {
-  animation: fade-up 0.7s ease-out 0.15s both;
+@media (max-width: 767px) {
+  .packet {
+    animation-name: packet-y;
+  }
 }
 
-.animate-fade-up-delay-2 {
-  animation: fade-up 0.7s ease-out 0.3s both;
+/* Load-animation start states. Applied only when JS runs (see the theme script),
+   so without JS everything renders in its final state. */
+.js .hero-line {
+  --wdth: 62;
 }
 
-.animate-fade-up-delay-3 {
-  animation: fade-up 0.7s ease-out 0.45s both;
-}
-
-/* ── Scroll reveal ── */
-.reveal {
+.js .pin-lit {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 
-/* ── Project card hover ── */
-.project-card {
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
+  .packet {
+    display: none;
+  }
 
-.project-card:hover {
-  border-color: rgba(170, 255, 0, 0.25);
-  box-shadow: 0 0 40px rgba(170, 255, 0, 0.05);
-}
+  .js .hero-line {
+    --wdth: 125;
+  }
 
-.project-card:hover .project-title {
-  color: #aaff00;
-}
-
-/* ── Timeline dot hover ── */
-.timeline-item:hover .timeline-dot {
-  background-color: #aaff00;
-  box-shadow: 0 0 12px rgba(170, 255, 0, 0.6);
-}
-
-/* ── Tech item ── */
-.tech-item {
-  transition: color 0.2s ease;
-}
-
-.tech-item:hover {
-  color: #f5f5f7;
-}
-
-/* ── Hover lift ── */
-.hover-lift {
-  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
-}
-
-.hover-lift:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-/* ── Horizontal scroll container ── */
-.h-scroll-track {
-  display: flex;
-  will-change: transform;
-}
-
-/* ── Cursor blink ── */
-@keyframes blink {
-
-  0%,
-  100% {
+  .js .pin-lit {
     opacity: 1;
   }
-
-  50% {
-    opacity: 0;
-  }
 }
 
-.cursor-blink {
-  display: inline-block;
-  width: 3px;
-  height: 1em;
-  background: #aaff00;
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  animation: blink 1s step-end infinite;
+/* Pinout chip: keyboard focus ring on the pin's hit area */
+.pin {
+  outline: none;
 }
 
-/* ── Section border top ── */
-.section-border {
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+.pin:focus-visible .pin-hit {
+  stroke: var(--signal-ink);
+  stroke-width: 1.5;
 }

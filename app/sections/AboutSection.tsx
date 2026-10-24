@@ -1,95 +1,77 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+import { Reveal, Section } from "../components/ui";
+import { profile } from "../lib/content";
 
-const highlights = [
-  { label: "EDUCATION", value: "Bachelor (Hons.) in Information and Communication Technology (UG)", sub: "University of Kelaniya, Sri Lanka" },
-  { label: "LOCATION", value: "Sri Lanka 🇱🇰", sub: "Open to remote globally" },
-  { label: "STARTED", value: "2019", sub: "6+ years building software" },
-];
+function CropMarks() {
+  const mark = "absolute size-4 border-ink";
+  return (
+    <span aria-hidden="true">
+      <span className={`${mark} -left-2 -top-2 border-l border-t`} />
+      <span className={`${mark} -right-2 -top-2 border-r border-t`} />
+      <span className={`${mark} -bottom-2 -left-2 border-b border-l`} />
+      <span className={`${mark} -bottom-2 -right-2 border-b border-r`} />
+    </span>
+  );
+}
 
 export default function AboutSection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section id="about" ref={ref} className="py-24 bg-[#111116] section-border">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
-          >
-            <span className="font-mono text-xs text-volt uppercase tracking-[0.2em] mb-4 block">
-              About
-            </span>
-            <h2 className="text-4xl text-surgical-white font-medium tracking-tight mb-6">
-              Engineering<br />with purpose.
-            </h2>
-            <p className="text-sm text-foreground leading-relaxed mb-4">
-              I&apos;m a Full-Stack Developer passionate about software engineering, who loves building
-              scalable web applications with smooth, engaging user experiences.
-              {/* From IoT real-time dashboards to SaaS platforms — I&apos;ve shipped it all. */}
-            </p>
-            <p className="text-sm text-foreground leading-relaxed mb-8">
-              My journey started with{" "}
-              <span className="text-surgical-white">C# and CLI tools in 2019</span>, evolved
-              through <span className="text-surgical-white">building LMS platforms</span> during COVID,
-              and today I craft enterprise-grade frontends with modern web technologies.
-              {/* <span className="text-volt">Next.js, GSAP, and Framer Motion</span>. */}
-            </p>
-
-            {/* Stats */}
-            <div className="flex gap-10">
-              {[
-                { num: "5+", label: "Yrs Coding" },
-                { num: "10+", label: "Projects" },
-                { num: "2", label: "Companies" },
-              ].map(({ num, label }) => (
-                <div key={label}>
-                  <div className="text-3xl font-medium text-volt tracking-tight">{num}</div>
-                  <div className="font-mono text-[10px] text-surgical-white/80 uppercase tracking-widest mt-1">{label}</div>
-                </div>
-              ))}
+    <Section id="about" index={3} term="Description" title="About">
+      <div className="grid gap-12 lg:grid-cols-9 lg:gap-10">
+        <Reveal className="lg:col-span-4">
+          <figure className="flex flex-col gap-3">
+            <div className="relative mx-2 mt-2">
+              <Image
+                src="/assets/img/profile-image.jpg"
+                alt="Portrait of Akash Geethanjana"
+                width={1984}
+                height={1984}
+                sizes="(min-width: 1024px) 28rem, (min-width: 768px) 60vw, 100vw"
+                className="aspect-square w-full object-cover"
+              />
+              <CropMarks />
             </div>
-          </motion.div>
+            <figcaption className="label mx-2 mt-2">
+              Fig. 3 · {profile.name}, {profile.location}
+            </figcaption>
+          </figure>
+        </Reveal>
 
-          {/* Right: info cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="flex flex-col gap-px border border-white/7"
-          >
-            {highlights.map(({ label, value, sub }) => (
-              <div
-                key={label}
-                className="group flex items-start justify-between p-6 bg-[#0a0a0f] hover:bg-[#18181f] transition-colors duration-300"
-              >
-                <div>
-                  <div className="font-mono text-[10px] text-foreground/50 uppercase tracking-widest mb-1">{label}</div>
-                  <div className="text-surgical-white font-medium">{value}</div>
-                  <div className="font-mono text-xs text-foreground/60 mt-0.5">{sub}</div>
-                </div>
-                <span className="text-volt opacity-0 group-hover:opacity-100 transition-opacity font-mono text-xs">→</span>
-              </div>
-            ))}
+        <Reveal className="flex flex-col gap-6 text-lg leading-relaxed text-ink-2 lg:col-span-5" delay={0.08}>
+          <p className="text-2xl leading-snug text-ink">
+            I started programming in 2019 with C#, writing command-line tools and Windows Forms apps.
+            That was the first time I saw software solve a real problem for someone.
+          </p>
+          <p>
+            Then came the web. I worked on the frontend of Vidusaviya, an education management
+            system, and during COVID-19 I built TecLMS so my classmates could share study material
+            safely. In 2021 I co-founded Bitzquad and spent three years shipping products for
+            clients. In 2025 I joined promiseQ, building the cloud interface for their edge-AI devices.
+          </p>
+          <p>
+            The work I enjoy most is where software meets hardware. I like wiring up microcontrollers
+            and sensors, then building the dashboard that makes them useful to people. Premise Edge,
+            my university project, came out of that.
+          </p>
 
-            {/* Fun fact row */}
-            <div className="p-6 bg-[#0a0a0f] border-t border-white/7">
-              <div className="font-mono text-[10px] text-volt uppercase tracking-widest mb-2">⚡ Fun Fact</div>
-              <p className="text-sm text-foreground leading-relaxed">
-                I love combining{" "}
-                <span className="text-surgical-white">hardware + software</span> to build
-                smart systems that interact with the real world.
-              </p>
+          <dl className="mt-4 grid gap-px border border-rule bg-rule sm:grid-cols-2">
+            <div className="flex flex-col gap-1 bg-paper p-4">
+              <dt className="label">Education</dt>
+              <dd className="text-base leading-snug text-ink">
+                BICT (Hons), Faculty of Computing and Technology, University of Kelaniya
+              </dd>
             </div>
-          </motion.div>
-        </div>
+            <div className="flex flex-col gap-1 bg-paper p-4">
+              <dt className="label">Looking for</dt>
+              <dd className="text-base leading-snug text-ink">
+                Remote roles and frontend, full-stack or IoT projects
+              </dd>
+            </div>
+          </dl>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }
