@@ -64,9 +64,8 @@ export default function ContactSection() {
             className="space-y-8"
           >
             <p className="text-sm text-foreground leading-relaxed max-w-md">
-              I&apos;m always open to discussing new opportunities, interesting
-              projects, or just a friendly chat about tech. Based in Sri Lanka,
-              working globally.
+              Always happy to chat about tech, swap ideas, or hear about
+              something interesting you&apos;re building. Based in Sri Lanka.
             </p>
 
             <div className="space-y-4">
@@ -93,17 +92,6 @@ export default function ContactSection() {
               ))}
             </div>
 
-            {/* Availability */}
-            {/* <div className="flex items-center gap-3">
-              <motion.div
-                className="size-2 rounded-full bg-volt"
-                animate={{ opacity: [1, 0.3, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              <span className="font-mono text-xs text-foreground/60 uppercase tracking-widest">
-                Available for full-time &amp; freelance
-              </span>
-            </div> */}
           </motion.div>
 
           {/* Right: form */}
@@ -177,7 +165,7 @@ export default function ContactSection() {
                       rows={5}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      placeholder="Tell me about your project or just say hi..."
+                      placeholder="Say hi, or tell me what you're working on..."
                       className="w-full px-4 py-3 bg-[#111116] border border-white/7 text-surgical-white placeholder:text-surgical-white/40 text-sm font-mono focus:outline-none transition-colors resize-none block"
                     />
                     {/* Drawing Border SVG on Focus */}

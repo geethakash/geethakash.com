@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -19,8 +17,7 @@ export default function Footer() {
             </h2>
             <p className="text-sm text-foreground leading-relaxed">
               I enjoy combining hardware + software to build smart systems that
-              interact with the real world. Available for frontend, full-stack,
-              and IoT projects.
+              interact with the real world.
             </p>
           </div>
 
@@ -68,16 +65,6 @@ export default function Footer() {
           <div className="font-mono text-[10px] text-foreground/40 uppercase tracking-widest">
             © {year} Akash Geethanjana
           </div>
-          {/* <div className="flex items-center gap-2">
-            <motion.div
-              className="size-2 rounded-full bg-volt"
-              animate={{ boxShadow: ["0 0 4px rgba(170,255,0,0.4)", "0 0 14px rgba(170,255,0,0.9)", "0 0 4px rgba(170,255,0,0.4)"] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <span className="font-mono text-[10px] text-foreground/40 uppercase tracking-widest">
-              Available for hire
-            </span>
-          </div> */}
         </div>
       </div>
     </footer>

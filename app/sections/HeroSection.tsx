@@ -201,7 +201,7 @@ export default function HeroSection() {
         {/* CTA buttons */}
         <div className="hero-cta mt-12 flex flex-wrap gap-4">
           <a
-            href="#projects"
+            href="#work"
             className="group relative inline-flex items-center justify-center px-7 py-3.5 bg-volt text-obsidian font-mono text-xs font-bold uppercase tracking-widest transition-colors duration-300 overflow-hidden"
           >
             {/* Drawing Border SVG Overlay */}
