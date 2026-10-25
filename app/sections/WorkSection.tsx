@@ -85,7 +85,7 @@ const moreProjects: {
     name: "Flavour POS",
     year: "2025",
     description: "Point-of-sale system for restaurants, built for fast order entry during busy service.",
-    tags: ["React", "Node.js", "MongoDB"],
+    tags: ["PHP", "PostgreSQL"],
   },
   {
     name: "Bitzquad Website",
