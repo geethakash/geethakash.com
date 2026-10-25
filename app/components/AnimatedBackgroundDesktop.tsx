@@ -443,11 +443,6 @@ export default function AnimatedBackgroundDesktop() {
             className="bg-orb absolute rounded-full blur-[130px] opacity-[0.045]"
             style={{ right: "5%", bottom: "15%", width: 550, height: 550, background: "#4040cc" }}
           />
-          {/* Faint center volt celestial dust */}
-          <div
-            className="bg-orb absolute rounded-full blur-[160px] opacity-[0.04]"
-            style={{ left: "38%", top: "42%", width: 750, height: 750, background: "#aaff00" }}
-          />
           {/* Subtle deep nebula patch top-right */}
           <div
             className="bg-orb absolute rounded-full blur-[140px] opacity-[0.035]"

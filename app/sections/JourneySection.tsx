@@ -78,7 +78,7 @@ function TimelineItemCard({
 
       {/* Year badge */}
       <span
-        className={`font-mono text-[10px] uppercase tracking-widest mb-2 block transition-colors duration-400 ${
+        className={`font-mono text-xs uppercase tracking-widest mb-2 block transition-colors duration-400 ${
           isCurrent ? "text-volt font-bold" : isReached ? "text-volt/80 font-medium" : "text-foreground/40"
         }`}
       >
@@ -87,7 +87,7 @@ function TimelineItemCard({
 
       {/* Title */}
       <h3
-        className={`text-lg font-medium mb-2 transition-colors duration-400 ${
+        className={`text-xl font-medium mb-2 transition-colors duration-400 ${
           isCurrent ? "text-surgical-white font-semibold" : isReached ? "text-surgical-white/90" : "text-surgical-white/50"
         }`}
       >
@@ -96,7 +96,7 @@ function TimelineItemCard({
 
       {/* Description */}
       <p
-        className={`text-sm leading-relaxed mb-4 max-w-2xl transition-colors duration-400 ${
+        className={`text-base leading-relaxed mb-4 max-w-2xl transition-colors duration-400 ${
           isCurrent ? "text-foreground" : isReached ? "text-foreground/80" : "text-foreground/45"
         }`}
       >
@@ -108,7 +108,7 @@ function TimelineItemCard({
         {event.tech.map((t: string) => (
           <span
             key={t}
-            className={`text-[10px] px-2 py-0.5 font-mono uppercase border transition-all duration-400 ${
+            className={`text-[11px] px-2.5 py-1 font-mono uppercase border transition-all duration-400 ${
               isCurrent
                 ? "bg-[#18181f] text-surgical-white border-volt/40"
                 : isReached
@@ -151,10 +151,10 @@ export default function JourneySection() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <span className="font-mono text-xs text-volt uppercase tracking-[0.2em]">
+          <span className="font-mono text-xs md:text-sm text-volt uppercase tracking-[0.2em]">
             Timeline
           </span>
-          <h2 className="text-4xl text-surgical-white font-medium tracking-tight mt-2">
+          <h2 className="text-4xl md:text-5xl text-surgical-white font-medium tracking-tight mt-2">
             The Journey
           </h2>
         </motion.div>

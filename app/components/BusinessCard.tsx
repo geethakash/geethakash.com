@@ -25,7 +25,7 @@ export default function BusinessCard({ className = "" }: BusinessCardProps) {
             Full-Stack Developer
           </span>
           <h1 className="pt-1 text-xl sm:text-2xl md:text-4xl font-medium tracking-tight text-surgical-white leading-[0.9]">
-            AKASH
+            AKASH{" "}
             <br />
             <span className="text-volt">GEETHANJANA</span>
           </h1>

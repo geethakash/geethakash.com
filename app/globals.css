@@ -195,10 +195,52 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* ── Horizontal scroll container ── */
-.h-scroll-track {
-  display: flex;
-  will-change: transform;
+/* ── Signal-flow packets (Premise Edge diagram) ── */
+.packet {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #aaff00;
+  box-shadow: 0 0 8px rgba(170, 255, 0, 0.7);
+  animation: packet-x 2.4s linear infinite;
+}
+
+.packet.is-return {
+  background: #f5f5f7;
+  box-shadow: none;
+  animation-direction: reverse;
+}
+
+@keyframes packet-x {
+  from {
+    left: 0%;
+  }
+
+  to {
+    left: calc(100% - 6px);
+  }
+}
+
+@keyframes packet-y {
+  from {
+    top: 0%;
+  }
+
+  to {
+    top: calc(100% - 6px);
+  }
+}
+
+@media (max-width: 767px) {
+  .packet {
+    animation-name: packet-y;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .packet {
+    display: none;
+  }
 }
 
 /* ── Cursor blink ── */
